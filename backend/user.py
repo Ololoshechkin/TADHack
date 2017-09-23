@@ -44,7 +44,7 @@ class User:
     def __init__(self, name, sex, age, login, person_info):
         self.name = name
         self.sex = sex
-        self.age = age
+        self.age = int(age)
         self.login = login
         self.person_info = person_info
 

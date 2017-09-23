@@ -16,55 +16,56 @@ class Server(Resource):
     """
 
     def __init__(self):
-        self.actions = server_actions.Actions()
-        self.tokens = {}
-        self.logins = {}
+        self._actions = server_actions.Actions()
+        self._tokens = {}
+        self._logins = {}
 
-    def get_new_token(self, login, password):
+    def _get_new_token(self, login, password):
         TOKEN_LEN = 32
-        if self.actions.storage.is_user(login, password):
+        if self._actions.storage.is_user(login, password):
             token = ''.join(
                 random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
             )
-            if login in self.tokens:
-                self.tokens.pop(self.logins[login])
-                self.logins.pop(login)
-            self.logins[login] = token
-            self.tokens[token] = login
+            if login in self._tokens:
+                self._tokens.pop(self._logins[login])
+                self._logins.pop(login)
+            self._logins[login] = token
+            self._tokens[token] = login
             return token
         else:
             return None
 
-    def is_correct_token(self, token):
-        return token in self.tokens
+    def _is_correct_token(self, token):
+        return token in self._tokens
 
     @staticmethod
-    def get_user_from_json(data):
+    def _get_user_from_json(data):
         return user.User(**data)
 
     def get(self, function_name, args):
+        SPECIAL_ANSWER = 'FUCK YOU!'
         try:
             parsed = loads(str(args))
         except TypeError:
-            return "FUCK YOU!"
+            return SPECIAL_ANSWER
         try:
             if function_name == 'new_user':
                 login = parsed['login']
-                return self.actions.new_user(
+                return self._actions.new_user(
                     login,
                     parsed['password'],
-                    Server.get_user_from_json(parsed['user'])
+                    Server._get_user_from_json(parsed['user'])
                 )
             elif function_name == 'get_new_token':
                 login = parsed['login']
-                return self.get_new_token(
+                return self._get_new_token(
                     login,
                     parsed['password']
                 )
-            elif self.is_correct_token(parsed['token']):
-                login = self.tokens[parsed['token']]
+            elif self._is_correct_token(parsed['token']):
+                login = self._tokens[parsed['token']]
                 if function_name == 'find_person_nearby':
-                    return self.actions.find_person_nearby(
+                    return self._actions.find_person_nearby(
                         login,
                         int(parsed['max_duration']),
                         parsed['sex'],
@@ -72,23 +73,23 @@ class Server(Resource):
                         int(parsed['max_age'])
                     )
                 elif function_name == 'update_position':
-                    return self.actions.update_position(
+                    return self._actions.update_position(
                         login,
                         parsed['position']
                     )
                 elif function_name == 'update_user_info':
-                    return self.actions.update_user_info(
+                    return self._actions.update_user_info(
                         login,
-                        Server.get_user_from_json(parsed['user'])
+                        Server._get_user_from_json(parsed['user'])
                     )
                 elif function_name == 'update_targets':
-                    return self.actions.update_targets(
+                    return self._actions.update_targets(
                         login,
                         parsed['targets']
                     )
         except IndexError:
-            return "FUCK YOU!"
-        return "FUCK YOU!"
+            return SPECIAL_ANSWER
+        return SPECIAL_ANSWER
 
 
 def start_server():
@@ -100,6 +101,7 @@ def start_server():
 
 if __name__ == '__main__':
     server = Server()
+
 
     def TestNewUser():
         rets = []
@@ -143,16 +145,16 @@ if __name__ == '__main__':
             }))
         ]
         rets += [
-            server.get_user_from_json({
-                    "name": "Andrey",
-                    "sex": "m",
-                    "age": 1999,
-                    "login": "wafemand",
-                    "person_info": {}
-                })
+            server.__get_user_from_json({
+                "name": "Andrey",
+                "sex": "m",
+                "age": 1999,
+                "login": "wafemand",
+                "person_info": {}
+            })
         ]
         rets += [
-            server.get_user_from_json({
+            server.__get_user_from_json({
                 "name": "1",
                 "sex": "m",
                 "age": 'aaa',
@@ -174,11 +176,11 @@ if __name__ == '__main__':
             }))
         ]
         rets += [
-            server.get_new_token('wafemand', '1111')
+            server._get_new_token('wafemand', '1111')
         ]
         print(*rets, sep = '\n')
 
 
 
-    TestNewUser()
-    #start_server()
+        TestNewUser()
+        # start_server()
