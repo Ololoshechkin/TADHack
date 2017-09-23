@@ -59,7 +59,10 @@ class Server(Resource):
                 if function_name == 'find_person_nearby':
                     return self.actions.find_person_nearby(
                         login,
-                        parsed['max_duration']
+                        int(parsed['max_duration']),
+                        parsed['sex'],
+                        int(parsed['min_age']),
+                        int(parsed['max_age'])
                     )
                 elif function_name == 'update_position':
                     return self.actions.update_position(

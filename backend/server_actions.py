@@ -9,18 +9,20 @@ class Actions:
         self.storage = user.RecordsStorage()  # 'Test001' todo
         self.gmap = distance.GMap(distance.GOOGLE_API_KEY)
 
-    def find_person_nearby(self, main_login, max_duration):
+    def find_person_nearby(self, main_login, max_duration, sex, min_age, max_age):
+        main_user = self.storage.users[main_login]
         result = ticketList.TicketList(
-            self.storage.users[main_login].person_info['targets']
+            main_user.person_info['targets']
         )
         for login, person in self.storage.users.iteritems():
             if login != main_login:
-                duration = self.gmap.get_duration(
-                    position,
-                    person.person_info['position']
-                )
-                if duration < max_duration:
-                    result.addTicket(person.person_info['targets'])
+                if main_user.sex in sex and min_age <= main_user.year <= max_age:
+                    duration = self.gmap.get_duration(
+                        position,
+                        person.person_info['position']
+                    )
+                    if duration < max_duration:
+                        result.addTicket(person.person_info['targets'])
         result.sort()
         return result.tickets
 
