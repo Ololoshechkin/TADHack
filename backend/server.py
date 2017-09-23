@@ -48,20 +48,21 @@ class Server(Resource):
         except TypeError:
             return "FUCK YOU!"
         try:
-            login = parsed['login']
             if function_name == 'new_user':
-                print(parsed)
+                login = parsed['login']
                 return self.actions.new_user(
                     login,
                     parsed['password'],
                     Server.get_user_from_json(parsed['user'])
                 )
             elif function_name == 'get_new_token':
+                login = parsed['login']
                 return self.get_new_token(
                     login,
                     parsed['password']
                 )
-            elif self.logins[login] == parsed['token']:
+            elif is_correct_token(parsed['token']):
+                login = self.tokens[parsed['token']]
                 if function_name == 'find_person_nearby':
                     return self.actions.find_person_nearby(
                         login,
