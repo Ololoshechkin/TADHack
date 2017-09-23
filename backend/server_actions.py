@@ -1,7 +1,7 @@
 import user
 import distance
 import random
-import ticketList
+import ticket_list
 
 
 class Actions:
@@ -11,7 +11,7 @@ class Actions:
 
     def find_person_nearby(self, main_login, max_duration, sex, min_age, max_age):
         main_user = self.storage.users[main_login]
-        result = ticketList.TicketList(
+        result = ticket_list.TicketList(
             main_user.person_info['targets']
         )
         for login, person in self.storage.users.iteritems():
