@@ -26,7 +26,7 @@ class Server(Resource):
             token = ''.join(
                 random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
             )
-            if login in self._login:
+            if login in self._logins:
                 self._tokens.pop(self._logins[login])
                 self._logins.pop(login)
             self._logins[login] = token
@@ -101,88 +101,3 @@ def start_server():
 
 if __name__ == '__main__':
     start_server()
-
-    server = Server()
-
-
-    def TestNewUser():
-        rets = []
-        rets += [
-            server.get('new_user', dumps({
-                "login": 'josdas',
-                "password": '1234',
-                "user": {
-                    "name": "Stas",
-                    "sex": "m",
-                    "age": 1998,
-                    "login": "josdas",
-                    "person_info": {}
-                }
-            }))
-        ]
-        rets += [
-            server.get('new_user', dumps({
-                "login": 'josdas',
-                "password": '1111',
-                "user": {
-                    "name": "Stas",
-                    "sex": "m",
-                    "age": 1998,
-                    "login": "josdas",
-                    "person_info": {}
-                }
-            }))
-        ]
-        rets += [
-            server.get('new_user', dumps({
-                "login": 'wafemand',
-                "password": '1111',
-                "user": {
-                    "name": "Andrey",
-                    "sex": "m",
-                    "age": 1999,
-                    "login": "wafemand",
-                    "person_info": {}
-                }
-            }))
-        ]
-        rets += [
-            server.__get_user_from_json({
-                "name": "Andrey",
-                "sex": "m",
-                "age": 1999,
-                "login": "wafemand",
-                "person_info": {}
-            })
-        ]
-        rets += [
-            server.__get_user_from_json({
-                "name": "1",
-                "sex": "m",
-                "age": 'aaa',
-                "login": "1",
-                "person_info": {}
-            })
-        ]
-        rets += [
-            server.get('new_user', dumps({
-                "login": 'yury',
-                "password": 'LoveVika1998',
-                "user": {
-                    "name": "Yury",
-                    "sex": "m",
-                    "age": 1998,
-                    "login": "yury",
-                    "person_info": {}
-                }
-            }))
-        ]
-        rets += [
-            server._get_new_token('wafemand', '1111')
-        ]
-        print(*rets, sep = '\n')
-
-
-
-        TestNewUser()
-        # start_server()
