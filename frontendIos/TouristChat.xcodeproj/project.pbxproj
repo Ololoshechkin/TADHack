@@ -17,6 +17,11 @@
 		DDE93FD51F7672160042D10E /* SignInPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FD41F7672160042D10E /* SignInPageViewController.swift */; };
 		DDE93FD71F76721E0042D10E /* SignUpPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FD61F76721E0042D10E /* SignUpPageViewController.swift */; };
 		DDE93FD91F767E780042D10E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FD81F767E780042D10E /* Extensions.swift */; };
+		DDE93FDB1F7685DB0042D10E /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FDA1F7685DB0042D10E /* ServerApi.swift */; };
+		DDE93FDD1F768E700042D10E /* TestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FDC1F768E700042D10E /* TestFile.swift */; };
+		DDE93FDF1F769C710042D10E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FDE1F769C710042D10E /* ProfileViewController.swift */; };
+		DDE93FE11F769D4E0042D10E /* ProfileOrSearchTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FE01F769D4E0042D10E /* ProfileOrSearchTabBarController.swift */; };
+		DDE93FE31F76AFCF0042D10E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +38,11 @@
 		DDE93FD41F7672160042D10E /* SignInPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPageViewController.swift; sourceTree = "<group>"; };
 		DDE93FD61F76721E0042D10E /* SignUpPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPageViewController.swift; sourceTree = "<group>"; };
 		DDE93FD81F767E780042D10E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		DDE93FDA1F7685DB0042D10E /* ServerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
+		DDE93FDC1F768E700042D10E /* TestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFile.swift; sourceTree = "<group>"; };
+		DDE93FDE1F769C710042D10E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DDE93FE01F769D4E0042D10E /* ProfileOrSearchTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOrSearchTabBarController.swift; sourceTree = "<group>"; };
+		DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F38365F0BB9F0B891DE44E30 /* Pods-TouristChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouristChat/Pods-TouristChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,8 +95,13 @@
 			isa = PBXGroup;
 			children = (
 				DDC3FC8D1F75B793001AF282 /* AppDelegate.swift */,
+				DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */,
+				DDE93FDE1F769C710042D10E /* ProfileViewController.swift */,
 				DDC3FC8F1F75B793001AF282 /* ViewController.swift */,
+				DDE93FE01F769D4E0042D10E /* ProfileOrSearchTabBarController.swift */,
+				DDE93FDA1F7685DB0042D10E /* ServerApi.swift */,
 				DDE93FD21F7671E70042D10E /* LoginPageVIewController.swift */,
+				DDE93FDC1F768E700042D10E /* TestFile.swift */,
 				DDE93FD81F767E780042D10E /* Extensions.swift */,
 				DDE93FD41F7672160042D10E /* SignInPageViewController.swift */,
 				DDE93FD61F76721E0042D10E /* SignUpPageViewController.swift */,
@@ -239,9 +254,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDE93FDD1F768E700042D10E /* TestFile.swift in Sources */,
 				DDC3FC961F75B793001AF282 /* TouristChat.xcdatamodeld in Sources */,
+				DDE93FDF1F769C710042D10E /* ProfileViewController.swift in Sources */,
 				DDE93FD31F7671E70042D10E /* LoginPageVIewController.swift in Sources */,
 				DDC3FC901F75B793001AF282 /* ViewController.swift in Sources */,
+				DDE93FE11F769D4E0042D10E /* ProfileOrSearchTabBarController.swift in Sources */,
+				DDE93FE31F76AFCF0042D10E /* SearchViewController.swift in Sources */,
+				DDE93FDB1F7685DB0042D10E /* ServerApi.swift in Sources */,
 				DDE93FD71F76721E0042D10E /* SignUpPageViewController.swift in Sources */,
 				DDC3FC8E1F75B793001AF282 /* AppDelegate.swift in Sources */,
 				DDE93FD51F7672160042D10E /* SignInPageViewController.swift in Sources */,
