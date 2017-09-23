@@ -4,69 +4,13 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>GZIP.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>OLMKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-TouristChat.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Realm.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SwiftMatrixSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>2C1B73580459664CDC28515002C6D87B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>307141E14503580D2FDE20B123044955</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4708AA5B418D2D3707DB21990CDD38DB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9F1BC461C391AD1599C55379F01DEDFA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A6454923DBE14D9ED50D3CAC0D7377E5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

@@ -7,9 +7,4 @@ target 'TouristChat' do
 
   # Pods for TouristChat
 
-  pod 'SwiftMatrixSDK'
-  pod 'WebRTC'
-  pod 'OLMKit'
-  pod 'Realm'
-
 end

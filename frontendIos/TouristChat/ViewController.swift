@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftMatrixSDK
 
 class ViewController: UIViewController {
 
@@ -22,15 +21,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func startPress(_ sender: Any) {
-        let mxRestClient = MXRestClient(homeServer: URL(string: "http://matrix.org")!,
-                                        unrecognizedCertificateHandler: nil)
-        mxRestClient.publicRooms(onServer: "http://matrix.org", limit: 100) { response in
-            switch response {
-                case .success(let rooms):
-                    print("The public rooms are: \(rooms)")
-                case .failure: break
-            }
-        }
+        
     }
 // rooms is an array of MXPublicRoom objects containing information like room id
 }
