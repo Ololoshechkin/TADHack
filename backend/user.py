@@ -41,12 +41,12 @@ class RecordsStorage:
 
 
 class User:
-    def __init__(self, name, sex, year, login, person_info):
+    def __init__(self, name, sex, age, login, person_info):
         self.name = name
         self.sex = sex
-        self.year = year
+        self.age = age
         self.login = login
         self.person_info = person_info
 
     def __str__(self):
-        return self.name + " " + self.sex + " " + self.year
+        return self.name + " " + self.sex + " " + self.age

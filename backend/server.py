@@ -94,6 +94,25 @@ def start_server():
 
 
 if __name__ == '__main__':
+    server = Server()
+    print(
+        server.get('new_user',  dumps(
+                {
+                    "login": 'josdas',
+                    "password": '1234',
+                    "user": {
+                        "name": "Stas",
+                        "sex": "m",
+                        "age": 1998,
+                        "login": "josdas",
+                        "person_info": {
+
+                        }
+                    }
+                }
+            )
+        )
+    )
     print(dumps(
         {
             "login": 'josdas',
@@ -101,7 +120,7 @@ if __name__ == '__main__':
             "user": {
                 "name": "Stas",
                 "sex": "m",
-                "year": 1998,
+                "age": 1998,
                 "login": "josdas",
                 "person_info": {
 
@@ -109,4 +128,5 @@ if __name__ == '__main__':
             }
         }
     ))
+    server
     start_server()
