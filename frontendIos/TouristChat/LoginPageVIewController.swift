@@ -11,13 +11,6 @@ import UIKit
 
 class LoginPageVIewController: UIViewController {
     
-    private func nextPage(id: String) {
-        self.navigationController?.pushViewController(
-            (storyboard?.instantiateViewController(withIdentifier: id))!,
-            animated: true
-        )
-    }
-    
     @IBAction func signUp(_ sender: Any) {
         nextPage(id: "SignUp")
     }
