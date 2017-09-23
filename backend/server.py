@@ -7,23 +7,6 @@ import json
 import server_actions
 import user
 
-e = create_engine('sqlite:///salaries.db')
-
-
-class DepartmentsMeta(Resource):
-    def get(self):
-        conn = e.connect()
-        query = conn.execute("select distinct DEPARTMENT from salaries")
-        return {'departments': [i[0] for i in query.cursor.fetchall()]}
-
-
-class DepartmentalSalary(Resource):
-    def get(self, department_name):
-        conn = e.connect()
-        query = conn.execute("select * from salaries where Department='%s'" % department_name.upper())
-        result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
-        return result
-
 
 class Server(Resource):
     def __init__(self):
@@ -58,7 +41,7 @@ class Server(Resource):
             parsed = loads(str(args))
         except TypeError:
             return "FUCK YOU!"
-        try:  # http://localhost:5000/new_user/{login: }
+        try:
             login = parsed['login']
             if function_name == 'new_user':
                 print(parsed)
@@ -98,10 +81,14 @@ class Server(Resource):
         return "FUCK YOU!"
 
 
-if __name__ == '__main__':
+def start_server():
     app = Flask(__name__)
     api = Api(app)
+    api.add_resource(Server, '/<string:function_name>/<args>')
+    app.run()
 
+
+if __name__ == '__main__':
     print(dumps(
         {
             "login": 'josdas',
@@ -117,6 +104,4 @@ if __name__ == '__main__':
             }
         }
     ))
-
-    api.add_resource(Server, '/<string:function_name>/<args>')
-    app.run()
+    start_server()
