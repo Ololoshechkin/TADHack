@@ -1,38 +1,31 @@
-import user
-import distance
-import random
+# coding=utf-8
+from flask import Flask, request
+from flask_restful import Resource, Api
+from sqlalchemy import create_engine
+from json import dumps
+import server_actions
+
+e = create_engine('sqlite:///salaries.db')
 
 
-class Actions:
-    def __init__(self):
-        self.storage = user.RecordsStorage('Test001')
-        self.gmap = distance.GMap(distance.GOOGLE_API_KEY)
+class DepartmentsMeta(Resource):
+    def get(self):
+        conn = e.connect()
+        query = conn.execute("select distinct DEPARTMENT from salaries")
+        return {'departments': [i[0] for i in query.cursor.fetchall()]}
 
-    def findPersonNearby(self, position, max_duration):
-        result = []
-        for login, person in self.storage.users.iteritems():
-            if login != main_user.login:
-                duration = self.gmap.get_duration(
-                    position,
-                    person.person_info['position']
-                )
-                if duration < max_duration:
-                    result.append(person)
+
+class DepartmentalSalary(Resource):
+    def get(self, department_name):
+        conn = e.connect()
+        query = conn.execute("select * from salaries where Department='%s'" % department_name.upper())
+        result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
         return result
 
-    def update_position(self, login, position):
-        self.storage.users[login].person_info['position'] = position
 
-    def update_user_info(self, login, person):
-        self.storage.update_user(login, person)
-
-    def new_user(self, record, person):
-        self.storage.add_user(record, person)
-
-
-class Server:
+class Server(Resource):
     def __init__(self):
-        self.actions = Actions()
+        self.actions = server_actions.Actions()
         self.tokens = {}
         self.logins = {}
 
@@ -43,10 +36,35 @@ class Server:
                 random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
             )
             if login in self.tokens:
-                self.logins.pop(self.tokens[login])
-                self.tokens.pop(login)
-            self.tokens[login] = token
-            self.logins[token] = login
+                self.tokens.pop(self.logins[login])
+                self.logins.pop(login)
+            self.logins[login] = token
+            self.tokens[token] = login
             return token
         else:
             return None
+
+    def is_correct_token(self, token):
+        return token in self.tokens
+
+    def get(self, comand, args):
+
+        if comand == 'new_user':
+            pass
+        elif comand == 'get_new_token':
+            pass
+        elif comand == 'find_person_nearby':
+            pass
+        elif comand == 'update_position':
+            pass
+        elif comand == 'update_user_info':
+            pass
+        return "FUCK YOU!"
+
+
+if __name__ == '__main__':
+    app = Flask(__name__)
+    api = Api(app)
+
+    api.add_resource(Server, '/<string:comand>/<args>')
+    app.run()
