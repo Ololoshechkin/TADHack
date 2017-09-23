@@ -1,5 +1,4 @@
 class Target:
-    targetType = ""
 
     def __init__(self, _targetType):
         self.targetType = _targetType
@@ -9,11 +8,12 @@ class Target:
 
 
 class TargetList:
-    setOfTarget = set()
+
+    def __init__(self):
+        self.setOfTarget = set()
 
     def AddTarget(self, target):
         self.setOfTarget += target
-
 
     def __str__(self):
         return str(self.setOfTarget)
