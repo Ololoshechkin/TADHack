@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5FCD4F2D2089824CF03548C /* Pods_TouristChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07ACA0A07CC5B2BF122B7873 /* Pods_TouristChat.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		DDC3FC8E1F75B793001AF282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3FC8D1F75B793001AF282 /* AppDelegate.swift */; };
 		DDC3FC901F75B793001AF282 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3FC8F1F75B793001AF282 /* ViewController.swift */; };
 		DDC3FC931F75B793001AF282 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDC3FC911F75B793001AF282 /* Main.storyboard */; };
@@ -22,9 +23,11 @@
 		DDE93FDF1F769C710042D10E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FDE1F769C710042D10E /* ProfileViewController.swift */; };
 		DDE93FE11F769D4E0042D10E /* ProfileOrSearchTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FE01F769D4E0042D10E /* ProfileOrSearchTabBarController.swift */; };
 		DDE93FE31F76AFCF0042D10E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */; };
+		DDE93FE51F76F9530042D10E /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FE41F76F9530042D10E /* RequestCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07ACA0A07CC5B2BF122B7873 /* Pods_TouristChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouristChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC450AF4818EA939A871AF6 /* Pods-TouristChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TouristChat/Pods-TouristChat.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC3FC8A1F75B793001AF282 /* TouristChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouristChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC3FC8D1F75B793001AF282 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 		DDE93FDE1F769C710042D10E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DDE93FE01F769D4E0042D10E /* ProfileOrSearchTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOrSearchTabBarController.swift; sourceTree = "<group>"; };
 		DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DDE93FE41F76F9530042D10E /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		F38365F0BB9F0B891DE44E30 /* Pods-TouristChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouristChat/Pods-TouristChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5FCD4F2D2089824CF03548C /* Pods_TouristChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +65,7 @@
 		5A36EA7C7C47BF0430C36EC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07ACA0A07CC5B2BF122B7873 /* Pods_TouristChat.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -98,6 +104,7 @@
 				DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */,
 				DDE93FDE1F769C710042D10E /* ProfileViewController.swift */,
 				DDC3FC8F1F75B793001AF282 /* ViewController.swift */,
+				DDE93FE41F76F9530042D10E /* RequestCell.swift */,
 				DDE93FE01F769D4E0042D10E /* ProfileOrSearchTabBarController.swift */,
 				DDE93FDA1F7685DB0042D10E /* ServerApi.swift */,
 				DDE93FD21F7671E70042D10E /* LoginPageVIewController.swift */,
@@ -264,6 +271,7 @@
 				DDE93FDB1F7685DB0042D10E /* ServerApi.swift in Sources */,
 				DDE93FD71F76721E0042D10E /* SignUpPageViewController.swift in Sources */,
 				DDC3FC8E1F75B793001AF282 /* AppDelegate.swift in Sources */,
+				DDE93FE51F76F9530042D10E /* RequestCell.swift in Sources */,
 				DDE93FD51F7672160042D10E /* SignInPageViewController.swift in Sources */,
 				DDE93FD91F767E780042D10E /* Extensions.swift in Sources */,
 			);
