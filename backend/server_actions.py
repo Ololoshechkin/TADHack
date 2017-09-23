@@ -35,3 +35,6 @@ class Actions:
 
     def new_user(self, login, password, person):
         self.storage.add_user(user.Record(login, password), person)
+
+
+#if __name__ == '__main__':

@@ -89,19 +89,52 @@ def start_server():
 
 
 if __name__ == '__main__':
-    print(dumps(
-        {
-            "login": 'josdas',
-            "password": '1234',
-            "user": {
-                "name": "Stas",
-                "sex": "m",
-                "year": 1998,
-                "login": "josdas",
-                "person_info": {
+    server = Server()
 
+    def TestNewUser():
+        rets = []
+        rets += [
+            server.get('new_user', dumps({
+                "login": 'josdas',
+                "password": '1234',
+                "user": {
+                    "name": "Stas",
+                    "sex": "m",
+                    "year": 1998,
+                    "login": "josdas",
+                    "person_info": {}
                 }
-            }
-        }
-    ))
-    start_server()
+            }))
+        ]
+        rets += [
+            server.get('new_user', dumps({
+                "login": 'josdas',
+                "password": '1111',
+                "user": {
+                    "name": "Stas",
+                    "sex": "m",
+                    "year": 1998,
+                    "login": "josdas",
+                    "person_info": {}
+                }
+            }))
+        ]
+        rets += [
+            server.get('new_user', dumps({
+                "login": 'wafemand',
+                "password": '1111',
+                "user": {
+                    "name": "Andrey",
+                    "sex": "m",
+                    "year": 1999,
+                    "login": "wafemand",
+                    "person_info": {}
+                }
+            }))
+        ]
+        print(*rets, sep = '\n')
+
+
+
+    TestNewUser()
+    #start_server()
