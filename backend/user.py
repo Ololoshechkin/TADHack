@@ -49,4 +49,4 @@ class User:
         self.person_info = person_info
 
     def __str__(self):
-        return self.name + " " + self.sex + " " + self.year
+        return self.name + " " + self.sex + " " + str(self.year)
