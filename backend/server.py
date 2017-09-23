@@ -61,7 +61,7 @@ class Server(Resource):
                     login,
                     parsed['password']
                 )
-            elif is_correct_token(parsed['token']):
+            elif self.is_correct_token(parsed['token']):
                 login = self.tokens[parsed['token']]
                 if function_name == 'find_person_nearby':
                     return self.actions.find_person_nearby(
