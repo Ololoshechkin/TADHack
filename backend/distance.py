@@ -1,6 +1,8 @@
 import googlemaps
 from googlemaps.distance_matrix import distance_matrix
 
+# pip3 install tox
+
 GOOGLE_API_KEY = 'AIzaSyC4jSZqis47UqaA4Uahfxh8QwnKSJi0vhc'
 
 

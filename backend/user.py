@@ -2,7 +2,7 @@ import pickle
 
 
 class Record:
-    def __init__(self, login, password):  # todo crypto
+    def __init__(self, login, password):
         self.login = login
         self.password = password
 
@@ -18,10 +18,14 @@ class RecordsStorage:
             with open(file_name + "_users", 'rb') as file:
                 self.users = pickle.load(file=file)
 
-    def get_user(self, login, password):
-        if self.data[login] != password:  # todo too bad
-            return None
+    def is_user(self, login, password):
+        return login in self.data and self.data[login] == password
+
+    def get_user(self, login):
         return self.users[login]
+
+    def update_user(self, login, person):
+        self.users[login] = person
 
     def add_user(self, record, user):
         if record.login in self.data:
@@ -37,10 +41,11 @@ class RecordsStorage:
 
 
 class User:
-    def __init__(self, name, sex, year, person_info):
+    def __init__(self, name, sex, year, login, person_info):
         self.name = name
         self.sex = sex
         self.year = year
+        self.login = login
         self.person_info = person_info
 
     def __str__(self):
