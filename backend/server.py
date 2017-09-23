@@ -142,6 +142,40 @@ if __name__ == '__main__':
                 }
             }))
         ]
+        rets += [
+            server.get_user_from_json({
+                    "name": "Andrey",
+                    "sex": "m",
+                    "age": 1999,
+                    "login": "wafemand",
+                    "person_info": {}
+                })
+        ]
+        rets += [
+            server.get_user_from_json({
+                "name": "1",
+                "sex": "m",
+                "age": 'aaa',
+                "login": "1",
+                "person_info": {}
+            })
+        ]
+        rets += [
+            server.get('new_user', dumps({
+                "login": 'yury',
+                "password": 'LoveVika1998',
+                "user": {
+                    "name": "Yury",
+                    "sex": "m",
+                    "age": 1998,
+                    "login": "yury",
+                    "person_info": {}
+                }
+            }))
+        ]
+        rets += [
+            server.get_new_token('wafemand', '1111')
+        ]
         print(*rets, sep = '\n')
 
 
