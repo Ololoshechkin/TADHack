@@ -80,7 +80,7 @@ class Server(Resource):
                         login,
                         Server.get_user_from_json(parsed['user'])
                     )
-                elif function_name == 'update_position_targets':
+                elif function_name == 'update_targets':
                     return self.actions.update_targets(
                         login,
                         parsed['targets']
