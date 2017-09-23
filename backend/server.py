@@ -7,8 +7,6 @@ class Actions:
     def __init__(self):
         self.storage = user.RecordsStorage('Test001')
         self.gmap = distance.GMap(distance.GOOGLE_API_KEY)
-        self.tokens = {}
-        self.logins = {}
 
     def findPersonNearby(self, position, max_duration):
         result = []
@@ -31,11 +29,19 @@ class Actions:
     def new_user(self, record, person):
         self.storage.add_user(record, person)
 
+
+class Server:
+    def __init__(self):
+        self.actions = Actions()
+        self.tokens = {}
+        self.logins = {}
+
     def get_new_token(self, login, password):
         TOKEN_LEN = 32
-        if self.storage.is_user(login, password):
+        if self.actions.storage.is_user(login, password):
             token = ''.join(
-                random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN))
+                random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
+            )
             if login in self.tokens:
                 self.logins.pop(self.tokens[login])
                 self.tokens.pop(login)
@@ -44,7 +50,3 @@ class Actions:
             return token
         else:
             return None
-
-
-class Server:
-    pass

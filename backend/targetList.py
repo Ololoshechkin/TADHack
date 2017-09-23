@@ -1,8 +1,6 @@
 class Target:
-    targetType = ""
-
-    def __init__(self, _targetType):
-        self.targetType = _targetType
+    def __init__(self, targetType):
+        self.targetType = targetType
 
     def __str__(self):
         return self.targetType

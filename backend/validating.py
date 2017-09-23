@@ -34,8 +34,11 @@ def validate_name(name):
     if name.isdigit():
         return False
     for name_character in name:
-        if not (
-                        name_character.isalnum() or name_character == '-' or name_character == '_' or name_character == '.' or name_character == ' '):
+        if not (name_character.isalnum()
+                or name_character == '-'
+                or name_character == '_'
+                or name_character == '.'
+                or name_character == ' '):
             return False
         if name_character.isalpha():
             has_letter = True
