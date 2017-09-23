@@ -100,9 +100,7 @@ if __name__ == '__main__':
     server = Server()
 
     def TestNewUser():
-        rets = []
-        rets += [
-            server.get('new_user', dumps({
+        assert server.get('new_user', dumps({
                 "login": 'josdas',
                 "password": '1234',
                 "user": {
@@ -112,10 +110,8 @@ if __name__ == '__main__':
                     "login": "josdas",
                     "person_info": {}
                 }
-            }))
-        ]
-        rets += [
-            server.get('new_user', dumps({
+            })) is None
+        assert server.get('new_user', dumps({
                 "login": 'josdas',
                 "password": '1111',
                 "user": {
@@ -125,10 +121,8 @@ if __name__ == '__main__':
                     "login": "josdas",
                     "person_info": {}
                 }
-            }))
-        ]
-        rets += [
-            server.get('new_user', dumps({
+            })) == "FUCK YOU!"
+        assert server.get('new_user', dumps({
                 "login": 'wafemand',
                 "password": '1111',
                 "user": {
@@ -138,10 +132,14 @@ if __name__ == '__main__':
                     "login": "wafemand",
                     "person_info": {}
                 }
-            }))
-        ]
-        print(*rets, sep = '\n')
-        
+            })) is None
+        storage = server.actions.storage
+        logins = set()
+        for login in storage.data:
+            assert login not in logins
+            logins.add(login)
+
+
 
 
 
