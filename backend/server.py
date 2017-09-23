@@ -110,7 +110,7 @@ if __name__ == '__main__':
                 "user": {
                     "name": "Stas",
                     "sex": "m",
-                    "year": 1998,
+                    "age": 1998,
                     "login": "josdas",
                     "person_info": {}
                 }
@@ -123,7 +123,7 @@ if __name__ == '__main__':
                 "user": {
                     "name": "Stas",
                     "sex": "m",
-                    "year": 1998,
+                    "age": 1998,
                     "login": "josdas",
                     "person_info": {}
                 }
@@ -136,7 +136,7 @@ if __name__ == '__main__':
                 "user": {
                     "name": "Andrey",
                     "sex": "m",
-                    "year": 1999,
+                    "age": 1999,
                     "login": "wafemand",
                     "person_info": {}
                 }

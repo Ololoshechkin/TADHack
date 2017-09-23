@@ -16,7 +16,7 @@ class Actions:
         )
         for login, person in self.storage.users.iteritems():
             if login != main_login:
-                if main_user.sex in sex and min_age <= main_user.year <= max_age:
+                if main_user.sex in sex and min_age <= main_user.age <= max_age:
                     duration = self.gmap.get_duration(
                         main_user.position,
                         person.person_info['position']
