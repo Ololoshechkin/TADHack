@@ -10,5 +10,5 @@ class TicketList:
     def addTicket(self, ticket):
         self.tickets += [ticket]
 
-    def sorted(self):
+    def sort(self):
         return sorted(self.tickets, cmp=lambda x, y: self.relevance(x.targetList) > self.relevance(y.targetList))
