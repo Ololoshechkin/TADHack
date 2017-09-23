@@ -2,8 +2,10 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
-from json import dumps
+from json import dumps, loads
+import json
 import server_actions
+import user
 
 e = create_engine('sqlite:///salaries.db')
 
@@ -47,18 +49,52 @@ class Server(Resource):
     def is_correct_token(self, token):
         return token in self.tokens
 
-    def get(self, comand, args):
+    @staticmethod
+    def get_user_from_json(data):
+        return user.User(**data)
 
-        if comand == 'new_user':
-            pass
-        elif comand == 'get_new_token':
-            pass
-        elif comand == 'find_person_nearby':
-            pass
-        elif comand == 'update_position':
-            pass
-        elif comand == 'update_user_info':
-            pass
+    def get(self, function_name, args):
+        try:
+            parsed = loads(str(args))
+        except TypeError:
+            return "FUCK YOU!"
+        try:  # http://localhost:5000/new_user/{login: }
+            login = parsed['login']
+            if function_name == 'new_user':
+                print(parsed)
+                return self.actions.new_user(
+                    login,
+                    parsed['password'],
+                    Server.get_user_from_json(parsed['user'])
+                )
+            elif function_name == 'get_new_token':
+                return self.get_new_token(
+                    login,
+                    parsed['password']
+                )
+            elif self.logins[login] == parsed['token']:
+                if function_name == 'find_person_nearby':
+                    return self.actions.find_person_nearby(
+                        login,
+                        parsed['max_duration']
+                    )
+                elif function_name == 'update_position':
+                    return self.actions.update_position(
+                        login,
+                        parsed['position']
+                    )
+                elif function_name == 'update_user_info':
+                    return self.actions.update_user_info(
+                        login,
+                        Server.get_user_from_json(parsed['user'])
+                    )
+                elif function_name == 'update_position_targets':
+                    return self.actions.update_targets(
+                        login,
+                        parsed['targets']
+                    )
+        except IndexError:
+            return "FUCK YOU!"
         return "FUCK YOU!"
 
 
@@ -66,5 +102,21 @@ if __name__ == '__main__':
     app = Flask(__name__)
     api = Api(app)
 
-    api.add_resource(Server, '/<string:comand>/<args>')
+    print(dumps(
+        {
+            "login": 'josdas',
+            "password": '1234',
+            "user": {
+                "name": "Stas",
+                "sex": "m",
+                "year": 1998,
+                "login": "josdas",
+                "person_info": {
+
+                }
+            }
+        }
+    ))
+
+    api.add_resource(Server, '/<string:function_name>/<args>')
     app.run()
