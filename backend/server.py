@@ -14,6 +14,7 @@ class Server(Resource):
     """
     Special class for flask
     """
+
     def __init__(self):
         self.actions = server_actions.Actions()
         self.tokens = {}
