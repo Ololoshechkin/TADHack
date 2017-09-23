@@ -26,7 +26,7 @@ class Server(Resource):
             token = ''.join(
                 random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
             )
-            if login in self._tokens:
+            if login in self._login:
                 self._tokens.pop(self._logins[login])
                 self._logins.pop(login)
             self._logins[login] = token
@@ -93,13 +93,15 @@ class Server(Resource):
 
 
 def start_server():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/image', static_folder='tmp')
     api = Api(app)
     api.add_resource(Server, '/<string:function_name>/<args>')
     app.run()
 
 
 if __name__ == '__main__':
+    start_server()
+
     server = Server()
 
 
