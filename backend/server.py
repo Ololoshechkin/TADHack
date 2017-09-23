@@ -1,38 +1,22 @@
+# coding=utf-8
+from flask import Flask, request
+from flask_restful import Resource, Api
+from sqlalchemy import create_engine
+from json import dumps, loads
+import json
+import server_actions
 import user
-import distance
 import random
+import string
 
 
-class Actions:
+class Server(Resource):
+    """
+    Special class for flask
+    """
+
     def __init__(self):
-        self.storage = user.RecordsStorage('Test001')
-        self.gmap = distance.GMap(distance.GOOGLE_API_KEY)
-
-    def findPersonNearby(self, position, max_duration):
-        result = []
-        for login, person in self.storage.users.iteritems():
-            if login != main_user.login:
-                duration = self.gmap.get_duration(
-                    position,
-                    person.person_info['position']
-                )
-                if duration < max_duration:
-                    result.append(person)
-        return result
-
-    def update_position(self, login, position):
-        self.storage.users[login].person_info['position'] = position
-
-    def update_user_info(self, login, person):
-        self.storage.update_user(login, person)
-
-    def new_user(self, record, person):
-        self.storage.add_user(record, person)
-
-
-class Server:
-    def __init__(self):
-        self.actions = Actions()
+        self.actions = server_actions.Actions()
         self.tokens = {}
         self.logins = {}
 
@@ -43,10 +27,124 @@ class Server:
                 random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
             )
             if login in self.tokens:
-                self.logins.pop(self.tokens[login])
-                self.tokens.pop(login)
-            self.tokens[login] = token
-            self.logins[token] = login
+                self.tokens.pop(self.logins[login])
+                self.logins.pop(login)
+            self.logins[login] = token
+            self.tokens[token] = login
             return token
         else:
             return None
+
+    def is_correct_token(self, token):
+        return token in self.tokens
+
+    @staticmethod
+    def get_user_from_json(data):
+        return user.User(**data)
+
+    def get(self, function_name, args):
+        try:
+            parsed = loads(str(args))
+        except TypeError:
+            return "FUCK YOU!"
+        try:
+            if function_name == 'new_user':
+                login = parsed['login']
+                return self.actions.new_user(
+                    login,
+                    parsed['password'],
+                    Server.get_user_from_json(parsed['user'])
+                )
+            elif function_name == 'get_new_token':
+                login = parsed['login']
+                return self.get_new_token(
+                    login,
+                    parsed['password']
+                )
+            elif self.is_correct_token(parsed['token']):
+                login = self.tokens[parsed['token']]
+                if function_name == 'find_person_nearby':
+                    return self.actions.find_person_nearby(
+                        login,
+                        int(parsed['max_duration']),
+                        parsed['sex'],
+                        int(parsed['min_age']),
+                        int(parsed['max_age'])
+                    )
+                elif function_name == 'update_position':
+                    return self.actions.update_position(
+                        login,
+                        parsed['position']
+                    )
+                elif function_name == 'update_user_info':
+                    return self.actions.update_user_info(
+                        login,
+                        Server.get_user_from_json(parsed['user'])
+                    )
+                elif function_name == 'update_targets':
+                    return self.actions.update_targets(
+                        login,
+                        parsed['targets']
+                    )
+        except IndexError:
+            return "FUCK YOU!"
+        return "FUCK YOU!"
+
+
+def start_server():
+    app = Flask(__name__)
+    api = Api(app)
+    api.add_resource(Server, '/<string:function_name>/<args>')
+    app.run()
+
+
+if __name__ == '__main__':
+    server = Server()
+
+    def TestNewUser():
+        rets = []
+        rets += [
+            server.get('new_user', dumps({
+                "login": 'josdas',
+                "password": '1234',
+                "user": {
+                    "name": "Stas",
+                    "sex": "m",
+                    "year": 1998,
+                    "login": "josdas",
+                    "person_info": {}
+                }
+            }))
+        ]
+        rets += [
+            server.get('new_user', dumps({
+                "login": 'josdas',
+                "password": '1111',
+                "user": {
+                    "name": "Stas",
+                    "sex": "m",
+                    "year": 1998,
+                    "login": "josdas",
+                    "person_info": {}
+                }
+            }))
+        ]
+        rets += [
+            server.get('new_user', dumps({
+                "login": 'wafemand',
+                "password": '1111',
+                "user": {
+                    "name": "Andrey",
+                    "sex": "m",
+                    "year": 1999,
+                    "login": "wafemand",
+                    "person_info": {}
+                }
+            }))
+        ]
+        print(*rets, sep = '\n')
+
+
+
+    TestNewUser()
+    #start_server()

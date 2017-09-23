@@ -7,6 +7,10 @@ GOOGLE_API_KEY = 'AIzaSyC4jSZqis47UqaA4Uahfxh8QwnKSJi0vhc'
 
 
 class GMap:
+    """
+    Cover for goolge maps api
+    """
+
     def __init__(self, api_key):
         self.api_key = api_key
         self.gmaps = googlemaps.Client(key=api_key)
