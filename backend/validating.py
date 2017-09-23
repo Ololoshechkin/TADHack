@@ -3,6 +3,7 @@ import re
 
 current_date = datetime.datetime.now()
 
+
 def validate_login(login):
     has_letter = False
     if not login:
@@ -16,6 +17,7 @@ def validate_login(login):
             has_letter = True
     return has_letter
 
+
 def validate_year(year):
     if not year:
         return False
@@ -24,6 +26,7 @@ def validate_year(year):
     year_digit = int(year)
     return 1900 <= year_digit <= current_date.year
 
+
 def validate_name(name):
     has_letter = False
     if not name:
@@ -31,10 +34,9 @@ def validate_name(name):
     if name.isdigit():
         return False
     for name_character in name:
-        if not (name_character.isalnum() or name_character == '-' or name_character == '_' or name_character == '.' or name_character == ' '):
+        if not (
+                        name_character.isalnum() or name_character == '-' or name_character == '_' or name_character == '.' or name_character == ' '):
             return False
         if name_character.isalpha():
             has_letter = True
     return has_letter
-
-
