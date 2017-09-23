@@ -18,7 +18,7 @@ class Actions:
             if login != main_login:
                 if main_user.sex in sex and min_age <= main_user.year <= max_age:
                     duration = self.gmap.get_duration(
-                        position,
+                        main_user.position,
                         person.person_info['position']
                     )
                     if duration < max_duration:
