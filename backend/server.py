@@ -142,6 +142,9 @@ if __name__ == '__main__':
                 }
             }))
         ]
+        rets += [
+            server.get_new_token('josdas', '1234')
+        ]
         print(*rets, sep = '\n')
 
 
