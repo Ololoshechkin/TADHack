@@ -80,6 +80,7 @@ class TestServer(unittest.TestCase):
             )
                        )
         ]
+
         temp_json = server.get('find_person_nearby', dumps({
             "token": server._get_new_token("josdas", "1234"), "max_duration": "10900000", "sex": ["m"],
             "min_age": "0", "max_age": "14"
