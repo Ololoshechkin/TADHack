@@ -14,11 +14,11 @@ class Actions:
         result = ticket_list.TicketList(
             main_user.person_info['targets']
         )
-        for login, person in self.storage.users.iteritems():
+        for login, person in self.storage.users.items():
             if login != main_login:
-                if main_user.sex in sex and min_age <= main_user.year <= max_age:
+                if main_user.sex in sex and min_age <= main_user.age <= max_age:
                     duration = self.gmap.get_duration(
-                        position,
+                        main_user.position,
                         person.person_info['position']
                     )
                     if duration < max_duration:
