@@ -84,7 +84,6 @@ class Server(Resource):
                             info['position'] = list(info['position'])
                         if 'targets' in info:
                             info['targets'] = list(info['targets'])
-                    print(temp_users)
                     return dumps(temp_users)
 
                 elif function_name == 'update_position':
