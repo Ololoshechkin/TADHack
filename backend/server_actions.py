@@ -7,20 +7,24 @@ from matrix_client.client import MatrixClient
 
 class Actions:
     def __init__(self):
-        self.storage = user.RecordsStorage()# user.SAVE_NAME)
+        self.storage = user.RecordsStorage()  # user.SAVE_NAME)
         self.gmap = distance.GMap(distance.GOOGLE_API_KEY)
-        self.messages_storage = {} # user -> [new messages]
-        self.clients = {} # user -> client
+        self.messages_storage = {}  # user -> [new messages]
+        self.clients = {}  # user -> client
+        self.rooms = {}
 
-    def on_message(room, event):
-        if event['type'] == "m.room.member":
-            if event['membership'] == "join":
-                print("{0} joined".format(event['content']['displayname']))
-        elif event['type'] == "m.room.message":
-            if event['content']['msgtype'] == "m.text":
-                print("{0}: {1}".format(event['sender'], event['content']['body']))
-        else:
-            print(event['type'])
+    def get_callback_function(self, login_first, login_second):
+        def on_message(room, event):
+            if event['type'] == "m.room.message":
+                if event['content']['msgtype'] == "m.text":
+                    text = event['content']['body']
+                    sender = event['sender']
+                    if login_first == sender:
+                        self.messages_storage[login_second].append(text)
+                    else:
+                        self.messages_storage[login_first].append(text)
+
+        return on_message
 
     def find_person_nearby(self, main_login, max_duration, sex, min_age, max_age):
         main_user = self.storage.users[main_login]
@@ -49,9 +53,19 @@ class Actions:
         self.storage.add_user(user.Record(login, password), person)
         self.clients[login] = MatrixClient("https://tang.ents.ca")
 
-
-
     def send_message(self, login_from, login_to, message):
+        current_client = client[login_from]
+        second_client = client[login_to]
+        alias = min(login_from, login_to) + max(login_from, login_to)
+        if alias not in self.rooms:
+            try:
+                current_client.join_room("#" + alias + ":tang.ents.ca")
+            except:
+                self.rooms[alias] = current_client.create_room(alias)
+                self.rooms[alias].invate_user(second_client.user_id)
+                second_client.join_room("#" + alias + ":tang.ents.ca")
+
+
         host = "https://tang.ents.ca"
         client = MatrixClient(host)
         username = login_from
@@ -71,10 +85,6 @@ class Actions:
         alias = min(login_from, login_to) + max(login_from, login_to)
         room_id_alias = "#" + alias + ":tang.ents.ca"
         room = client.join_room(room_id_alias)
-        print(token==client.token)
+        print(token == client.token)
         ret = client.api.get_room_messages(room_id=room.room_id, token=token, direction="b")
         print(ret)
-
-
-
-
