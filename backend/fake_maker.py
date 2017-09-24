@@ -8,7 +8,7 @@ if __name__ == "__main__":
         "password": '1234',
         "user": {
             "name": "Stas",
-            "sex": "m",
+            "sex": "male",
             "age": 18,
             "login": "josdas",
             "person_info": {"interests": "Backend developer, ITMO student, pen spinner, ACM participant, I like going for a walk and talk to intresting people"}
@@ -28,7 +28,7 @@ if __name__ == "__main__":
         "password": '1111',
         "user": {
             "name": "Vadim",
-            "sex": "m",
+            "sex": "male",
             "age": 19,
             "login": "Ololoshechkin",
             "person_info": {"interests": "Kotlin deleloper, frontend developer, love going to bars to watch football"}
@@ -48,7 +48,7 @@ if __name__ == "__main__":
         "password": 'LoveVika1998',
         "user": {
             "name": "Yury",
-            "sex": "m",
+            "sex": "male",
             "age": 19,
             "login": "Yura",
             "person_info": {"interests": "Talk to me and know"}
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         "password": '1111',
         "user": {
             "name": "Andrey",
-            "sex": "f",
+            "sex": "male",
             "age": 19,
             "login": "Zaharych",
             "person_info": {"interests": "Working with matrix, walking"}
@@ -89,7 +89,7 @@ if __name__ == "__main__":
         "password": '1111',
         "user": {
             "name": "Lev",
-            "sex": "m",
+            "sex": "male",
             "age": 19,
             "login": "Lev",
             "person_info": {"interests": "Drink & program"}
@@ -110,7 +110,7 @@ if __name__ == "__main__":
         "password": 'LoveRNG1721',
         "user": {
             "name": "Ilya",
-            "sex": "m",
+            "sex": "male",
             "age": 19,
             "login": "KokorinIlya",
             "person_info": {"interests": "SIP reader, RNG builder, programmer, ITMO student"}
