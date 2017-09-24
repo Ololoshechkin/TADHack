@@ -20,7 +20,7 @@ class GMap:
         get two point
         return time from goolge maps api
         """
-        request = distance_matrix(self.gmaps, first_point, second_point,
+        request = distance_matrix(self.gmaps, tuple(first_point), tuple(second_point),
                                   transit_mode='transit',
                                   language='english', )
         elements = request['rows'][0]['elements'][0]
