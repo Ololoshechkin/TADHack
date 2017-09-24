@@ -3,6 +3,7 @@ import unittest
 from json import *
 
 
+class TestServer(unittest.TestCase):
     def test_NewUser(self):
         server = Server()
         rets = []
