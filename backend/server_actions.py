@@ -53,10 +53,11 @@ class Actions:
         username = login_from
         password = self.storage.data[login_from]
         token = client.login_with_password(username, password)
+        print(token)
         alias = min(login_from, login_to) + max(login_from, login_to)
         room_id_alias = "#" + alias + ":tang.ents.ca"
         room = client.join_room(room_id_alias)
-        ret = client.api.get_room_messages(room_id=room.room_id, token=token, direction="b")
+        ret = client.api.get_room_messages(room_id=room.room_id, token=client.token, direction="b")
         print(ret)
 
 

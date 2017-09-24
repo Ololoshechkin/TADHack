@@ -109,16 +109,19 @@ class Server(Resource):
                     )
                     return SUCCESS_ANSWER
                 elif function_name == 'send_message':
-                    return self._actions.send_message(
+                    self._actions.send_message(
                         login,
                         parsed['login_to'],
                         parsed['message']
                     )
+                    return SUCCESS_ANSWER
                 elif function_name == 'get_message':
-                    return self._actions.get_messages(
+                    self._actions.get_messages(
                         login,
                         parsed['login_to']
                     )
+                    return SUCCESS_ANSWER
+
 
         except IndexError:
             return SPECIAL_ANSWER
@@ -141,10 +144,6 @@ def start_server():
 if __name__ == '__main__':
     #start_server()
     server = Server()
-    token = server.get('get_new_token', dumps({
-        "login" : "wafemand",
-        "password" : "monkey"
-    }))
     server.get('new_user', dumps({
         "login": 'josdas',
         "password": 'monkey',
@@ -166,6 +165,10 @@ if __name__ == '__main__':
             "login": "josdas",
             "person_info": {}
         }
+    }))
+    token = server.get('get_new_token', dumps({
+        "login" : "wafemand",
+        "password" : "monkey"
     }))
     server.get('send_message', dumps({
         "token" : token,
