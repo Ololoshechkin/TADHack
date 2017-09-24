@@ -10,6 +10,7 @@ import server_actions
 import user
 import random
 import string
+import copy
 
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -78,7 +79,7 @@ class Server(Resource):
                         int(parsed['max_age'])
                     )
                     for i in range(len(temp_users)):
-                        temp_users[i] = temp_users[i].to_dick()
+                        temp_users[i] = copy.deepcopy(temp_users[i].to_dick())
                         info = temp_users[i]['person_info']
                         if 'position' in info:
                             info['position'] = list(info['position'])
