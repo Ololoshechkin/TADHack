@@ -49,7 +49,8 @@ class Server(Resource):
         return user.User(**data)
 
     def get(self, function_name, args):
-        SPECIAL_ANSWER = 'FUCK YOU!'
+        SPECIAL_ANSWER = 'bad'
+        SUCCESS_ANSWER = 'ok'
         try:
             parsed = loads(str(args))
         except TypeError:
@@ -57,11 +58,12 @@ class Server(Resource):
         try:
             if function_name == 'new_user':
                 login = parsed['login']
-                return self._actions.new_user(
+                self._actions.new_user(
                     login,
                     parsed['password'],
                     Server._get_user_from_json(parsed['user'])
                 )
+                return SUCCESS_ANSWER
             elif function_name == 'get_new_token':
                 login = parsed['login']
                 return self._get_new_token(
@@ -86,22 +88,24 @@ class Server(Resource):
                         if 'targets' in info:
                             info['targets'] = list(info['targets'])
                     return dumps(temp_users)
-
                 elif function_name == 'update_position':
-                    return self._actions.update_position(
+                    self._actions.update_position(
                         login,
                         tuple(parsed['position'])
                     )
+                    return SUCCESS_ANSWER
                 elif function_name == 'update_user_info':
-                    return self._actions.update_user_info(
+                    self._actions.update_user_info(
                         login,
                         Server._get_user_from_json(parsed['user'])
                     )
+                    return SUCCESS_ANSWER
                 elif function_name == 'update_targets':
-                    return self._actions.update_targets(
+                    self._actions.update_targets(
                         login,
                         set(parsed['targets'])
                     )
+                    return SUCCESS_ANSWER
         except IndexError:
             return SPECIAL_ANSWER
         return SPECIAL_ANSWER
@@ -149,4 +153,15 @@ def start_server():
 
 
 if __name__ == '__main__':
+    print(dumps({
+        "login": 'josdas',
+        "password": '1234',
+        "user": {
+            "name": "Stas",
+            "sex": "m",
+            "age": 1998,
+            "login": "josdas",
+            "person_info": {}
+        }
+    }))
     start_server()
