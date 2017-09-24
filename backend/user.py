@@ -41,7 +41,10 @@ class RecordsStorage:
         with open(name + "_users", 'wb') as file:
             pickle.dump(self.users, file=file)
 
-    def __del__(self):
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
         self.save(SAVE_NAME)
 
 
