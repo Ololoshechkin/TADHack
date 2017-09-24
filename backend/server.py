@@ -49,7 +49,7 @@ class Server(Resource):
         try:
             login = parsed['login']
             if function_name == 'new_user':
-                print(parsed)
+                #print(parsed)
                 return self.actions.new_user(
                     login,
                     parsed['password'],
@@ -97,51 +97,5 @@ def start_server():
 
 
 if __name__ == '__main__':
-    server = Server()
-
-    def TestNewUser():
-        assert server.get('new_user', dumps({
-                "login": 'josdas',
-                "password": '1234',
-                "user": {
-                    "name": "Stas",
-                    "sex": "m",
-                    "year": 1998,
-                    "login": "josdas",
-                    "person_info": {}
-                }
-            })) is None
-        assert server.get('new_user', dumps({
-                "login": 'josdas',
-                "password": '1111',
-                "user": {
-                    "name": "Stas",
-                    "sex": "m",
-                    "year": 1998,
-                    "login": "josdas",
-                    "person_info": {}
-                }
-            })) == "FUCK YOU!"
-        assert server.get('new_user', dumps({
-                "login": 'wafemand',
-                "password": '1111',
-                "user": {
-                    "name": "Andrey",
-                    "sex": "m",
-                    "year": 1999,
-                    "login": "wafemand",
-                    "person_info": {}
-                }
-            })) is None
-        storage = server.actions.storage
-        logins = set()
-        for login in storage.data:
-            assert login not in logins
-            logins.add(login)
-
-
-
-
-
-    TestNewUser()
+    pass
     #start_server()

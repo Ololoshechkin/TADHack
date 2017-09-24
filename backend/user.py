@@ -50,3 +50,10 @@ class User:
 
     def __str__(self):
         return self.name + " " + self.sex + " " + self.year
+
+    def __eq__(self, other):
+        return self.year == other.year and \
+               self.login == other.login and \
+               self.sex == other.sex and \
+               self.person_info == other.person_info and \
+               self.name == other.name
