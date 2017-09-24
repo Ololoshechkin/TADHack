@@ -10,20 +10,23 @@ import server_actions
 import user
 import random
 import string
-
-UPLOAD_FOLDER = '/tmp'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+import copy
 
 
 class Server(Resource):
     """
+    Singleton!
     Special class for flask
     """
 
     def __init__(self):
-        self._actions = server_actions.Actions()
-        self._tokens = {}
-        self._logins = {}
+        if not hasattr(Server, '_actions'):
+            Server._actions = server_actions.Actions()
+            Server._tokens = {}
+            Server._logins = {}
+        self._actions = Server._actions
+        self._tokens = Server._tokens
+        self._logins = Server._logins
 
     def _get_new_token(self, login, password):
         TOKEN_LEN = 32
@@ -48,7 +51,8 @@ class Server(Resource):
         return user.User(**data)
 
     def get(self, function_name, args):
-        SPECIAL_ANSWER = 'FUCK YOU!'
+        SPECIAL_ANSWER = 'bad'
+        SUCCESS_ANSWER = 'ok'
         try:
             parsed = loads(str(args))
         except TypeError:
@@ -56,11 +60,12 @@ class Server(Resource):
         try:
             if function_name == 'new_user':
                 login = parsed['login']
-                return self._actions.new_user(
+                self._actions.new_user(
                     login,
                     parsed['password'],
                     Server._get_user_from_json(parsed['user'])
                 )
+                return SUCCESS_ANSWER
             elif function_name == 'get_new_token':
                 login = parsed['login']
                 return self._get_new_token(
@@ -78,29 +83,31 @@ class Server(Resource):
                         int(parsed['max_age'])
                     )
                     for i in range(len(temp_users)):
-                        temp_users[i] = temp_users[i].to_dick()
+                        temp_users[i] = copy.deepcopy(temp_users[i].to_dick())
                         info = temp_users[i]['person_info']
                         if 'position' in info:
                             info['position'] = list(info['position'])
                         if 'targets' in info:
                             info['targets'] = list(info['targets'])
                     return dumps(temp_users)
-
                 elif function_name == 'update_position':
-                    return self._actions.update_position(
+                    self._actions.update_position(
                         login,
                         tuple(parsed['position'])
                     )
+                    return SUCCESS_ANSWER
                 elif function_name == 'update_user_info':
-                    return self._actions.update_user_info(
+                    self._actions.update_user_info(
                         login,
                         Server._get_user_from_json(parsed['user'])
                     )
+                    return SUCCESS_ANSWER
                 elif function_name == 'update_targets':
-                    return self._actions.update_targets(
+                    self._actions.update_targets(
                         login,
                         set(parsed['targets'])
                     )
+                    return SUCCESS_ANSWER
                 elif function_name == 'send_message':
                     return self._actions.send_message(
                         login,
@@ -128,35 +135,6 @@ def start_server():
     app = Flask(__name__, static_url_path='/image', static_folder='tmp')
     api = Api(app)
     api.add_resource(Server, '/<string:function_name>/<args>')
-
-    @app.route('/', methods=['GET', 'POST'])
-    def upload_file():
-        if request.method == 'POST':
-            # check if the post request has the file part
-            if 'file' not in request.files:
-                flash('No file part')
-                return redirect(request.url)
-            file = request.files['file']
-            # if user does not select file, browser also
-            # submit a empty part without filename
-            if file.filename == '':
-                flash('No selected file')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, filename))
-                return redirect(url_for('uploaded_file',
-                                        filename=filename))
-        return '''
-        <!doctype html>
-        <title>Upload new File</title>
-        <h1>Upload new File</h1>
-        <form method=post enctype=multipart/form-data>
-          <p><input type=file name=file>
-             <input type=submit value=Upload>
-        </form>
-        '''
-
     app.run()
 
 

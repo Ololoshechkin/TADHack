@@ -20,6 +20,7 @@ class SearchViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.hideKeyboardWhenTappedAround()
+        self.parent?.navigationItem.title = "Search parameters"
         requestMap["sex"] = "any"
         requestMap["age"] = [0, 200]
         requestMap["distance"] = 5

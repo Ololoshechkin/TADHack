@@ -1,5 +1,7 @@
 import pickle
 
+SAVE_NAME = "tmp/TEST_DB_001"
+
 
 class Record:
     def __init__(self, login, password):
@@ -39,6 +41,12 @@ class RecordsStorage:
         with open(name + "_users", 'wb') as file:
             pickle.dump(self.users, file=file)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.save(SAVE_NAME)
+
 
 class User:
     def __init__(self, name, sex, age, login, person_info):
@@ -46,6 +54,10 @@ class User:
         self.sex = sex
         self.age = int(age)
         self.login = login
+        if 'position' in person_info:
+            person_info['position'] = tuple(person_info['position'])
+        if 'targets' in person_info:
+            person_info['targets'] = set(person_info['targets'])
         self.person_info = person_info
 
     def to_dick(self):

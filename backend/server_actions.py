@@ -7,7 +7,7 @@ from matrix_client.client import MatrixClient
 
 class Actions:
     def __init__(self):
-        self.storage = user.RecordsStorage()  # 'Test001')
+        self.storage = user.RecordsStorage()# user.SAVE_NAME)
         self.gmap = distance.GMap(distance.GOOGLE_API_KEY)
 
     def find_person_nearby(self, main_login, max_duration, sex, min_age, max_age):

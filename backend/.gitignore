@@ -1,7 +1,12 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.idea/
 *.py[cod]
 *$py.class
+.pyc
+backend/__pycache__/
+backend/tmp/TEST_DB_001_passwords
+backend/tmp/TEST_DB_001_users
 
 # C extensions
 *.so
