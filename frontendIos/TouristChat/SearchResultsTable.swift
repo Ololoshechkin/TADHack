@@ -40,7 +40,14 @@ class SearchResultsTable: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let messageComposer = MessagesViewControllr()
+        if (messageComposer.canSendText()) {
+            let messageComposeVC = messageComposer.configuredMessageComposeViewController()
+            present(messageComposeVC, animated: true, completion: nil)
+        } else {
+            let errorAlert = UIAlertView(title: "Cannot Send Text Message", message: "Your device is not able to send text messages.", delegate: self, cancelButtonTitle: "OK")
+            errorAlert.show()
+        }
     }
     
 }

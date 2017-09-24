@@ -26,6 +26,7 @@
 		DDE93FE51F76F9530042D10E /* RequestCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE93FE41F76F9530042D10E /* RequestCells.swift */; };
 		DDF82BD81F7730440042BFF4 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BD71F7730440042BFF4 /* SearchResultCell.swift */; };
 		DDF82BDA1F7730720042BFF4 /* SearchResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BD91F7730720042BFF4 /* SearchResultsTable.swift */; };
+		DDF82BDC1F7738B30042BFF4 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BDB1F7738B30042BFF4 /* MessagesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		DDE93FE41F76F9530042D10E /* RequestCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCells.swift; sourceTree = "<group>"; };
 		DDF82BD71F7730440042BFF4 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		DDF82BD91F7730720042BFF4 /* SearchResultsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTable.swift; sourceTree = "<group>"; };
+		DDF82BDB1F7738B30042BFF4 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		F38365F0BB9F0B891DE44E30 /* Pods-TouristChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouristChat/Pods-TouristChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 				DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */,
 				DDE93FDE1F769C710042D10E /* ProfileViewController.swift */,
 				DDC3FC8F1F75B793001AF282 /* ViewController.swift */,
+				DDF82BDB1F7738B30042BFF4 /* MessagesViewController.swift */,
 				DDE93FE41F76F9530042D10E /* RequestCells.swift */,
 				DDE93FE01F769D4E0042D10E /* ProfileOrSearchTabBarController.swift */,
 				DDF82BD91F7730720042BFF4 /* SearchResultsTable.swift */,
@@ -281,6 +284,7 @@
 				DDC3FC8E1F75B793001AF282 /* AppDelegate.swift in Sources */,
 				DDE93FE51F76F9530042D10E /* RequestCells.swift in Sources */,
 				DDE93FD51F7672160042D10E /* SignInPageViewController.swift in Sources */,
+				DDF82BDC1F7738B30042BFF4 /* MessagesViewController.swift in Sources */,
 				DDE93FD91F767E780042D10E /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
