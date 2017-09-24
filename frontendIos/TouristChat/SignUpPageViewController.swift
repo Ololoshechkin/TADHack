@@ -39,10 +39,12 @@ class SignUpPageViewController: UIViewController {
         } else {
             ServerApi.signUp(
                 login: loginLabel.text!,
-                password: passwordLabel.text!,
+                password: passwordLabel.text!.hashValue,
                 name: nameLabel.text!,
                 secondName: secondNameLabel.text!,
                 interests: interestsTextBox.text!,
+                sex: "male",
+                age: 19,
                 postAction: {
                     self.prevPage()?.showAlert(
                         title: "Congratulations",

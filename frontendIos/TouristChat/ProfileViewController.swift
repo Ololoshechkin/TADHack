@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
-class ProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
 
     var user: ServerApi.User? = nil
 
@@ -25,7 +26,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     
     let picker = UIImagePickerController()
 
-    
     @IBAction func changePhoto(_ sender: Any) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
@@ -35,12 +35,24 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.hideKeyboardWhenTappedAround()
         picker.delegate = self
         photo.image = user!.photo ?? #imageLiteral(resourceName: "parisImage")
         age.text = "\(user!.age) years old"
         sex.text = "\(user!.sex)"
         nameAndSurname.text = user!.name + " " + user!.secondName
         interests.text = user!.interests
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        self.parent?.navigationItem.title = "Profile"
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     @IBAction func changeInfo(_ sender: Any) {
