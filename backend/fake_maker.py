@@ -11,16 +11,16 @@ if __name__ == "__main__":
             "sex": "m",
             "age": 18,
             "login": "josdas",
-            "person_info": {"interests": "backend, backend, backend and more backend"}
+            "person_info": {"interests": "Backend developer, ITMO student, pen spinner, ACM participant, I like going for a walk and talk to intresting people"}
         }
     }))
 
     server.get('update_position', dumps(
-        {"token": server._get_new_token('josdas', '1234'), "position": [59.974510, 30.337021]}
+        {"token": server._get_new_token('josdas', '1234'), "position": [59.974492, 30.337049]}
     ))
 
     server.get('update_targets', dumps(
-        {"token": server._get_new_token('josdas', '1234'), "targets": ["Write backend", "Go to hackaton", "Do a BJD lab"]}
+        {"token": server._get_new_token('josdas', '1234'), "targets": ["walking", "bike", "pubs", "visiting showplaces", "music", "cinema"]}
     ))
 
     server.get('new_user', dumps({
@@ -31,7 +31,7 @@ if __name__ == "__main__":
             "sex": "m",
             "age": 19,
             "login": "Ololoshechkin",
-            "person_info": {"interests": "Kotlin delelopment"}
+            "person_info": {"interests": "Kotlin deleloper, frontend developer, love going to bars to watch football"}
         }
     }))
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     ))
 
     server.get('update_targets', dumps(
-        {"token": server._get_new_token('Ololoshechkin', '1111'), "targets": ["Discuss Kotlin", "Go to hackaton"]}
+        {"token": server._get_new_token('Ololoshechkin', '1111'), "targets": ["walking", "music"]}
     ))
 
     server.get('new_user', dumps({
@@ -51,7 +51,7 @@ if __name__ == "__main__":
             "sex": "m",
             "age": 19,
             "login": "Yura",
-            "person_info": {"interests": "qwerty"}
+            "person_info": {"interests": "Talk to me and know"}
         }
     }))
 
@@ -60,28 +60,28 @@ if __name__ == "__main__":
     ))
 
     server.get('update_targets', dumps(
-        {"token": server._get_new_token('Yura', 'LoveVika1998'), "targets": ["Do a BJD lab", "Go to hackaton", "Crush somebody/s face"]}
+        {"token": server._get_new_token('Yura', 'LoveVika1998'), "targets": ["museums", "theaters", "sport"]}
     ))
 
     server.get('new_user', dumps({
-        "login": 'Alina',
+        "login": 'Zaharych',
         "password": '1111',
         "user": {
-            "name": "Alina",
+            "name": "Andrey",
             "sex": "f",
             "age": 19,
-            "login": "Alina",
-            "person_info": {"interests": "Work in google"}
+            "login": "Zaharych",
+            "person_info": {"interests": "Working with matrix, walking"}
         }
     }))
 
     server.get('update_position', dumps(
-        {"token": server._get_new_token('Alina', '1111'), "position": [100.874510, 130.336021]}
+        {"token": server._get_new_token('Zaharych', '1111'), "position": [100.874510, 130.336021]}
     ))
 
     server.get('update_targets', dumps(
-        {"token": server._get_new_token('Alina', '1111'),
-         "targets": ["Work in google", "Go to hackaton"]}
+        {"token": server._get_new_token('Zaharych', '1111'),
+         "targets": ["visiting showplaces", "walking"]}
     ))
 
     server.get('new_user', dumps({
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
     server.get('update_targets', dumps(
         {"token": server._get_new_token('Lev', '1111'),
-         "targets": ["Go to hackaton", "Watch videos", "Drink", "Go to bar"]}
+         "targets": ["pubs", "cinema", "walking"]}
     ))
 
     server.get('new_user', dumps({
@@ -113,15 +113,15 @@ if __name__ == "__main__":
             "sex": "m",
             "age": 19,
             "login": "KokorinIlya",
-            "person_info": {"interests": "SIP, programming"}
+            "person_info": {"interests": "SIP reader, RNG builder, programmer, ITMO student"}
         }
     }))
 
     server.get('update_position', dumps(
-        {"token": server._get_new_token('KokorinIlya', 'LoveRNG721'), "position": [59.871510, 28.001488]}
+        {"token": server._get_new_token('KokorinIlya', 'LoveRNG721'), "position": [59.9793171, 30.3363184]}
     ))
 
     server.get('update_targets', dumps(
         {"token": server._get_new_token('KokorinIlya', 'LoveRNG1721'),
-         "targets": ["Go to hackaton", "Build RNG", "Drink", "Go to bar", "Discuss functional programming", "Hate OOP"]}
+         "targets": ["walking", "pubs", "cinema", "music", "sport", "bike"]}
     ))
