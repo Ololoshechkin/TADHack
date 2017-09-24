@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/TEDHack.iml" filepath="$PROJECT_DIR$/.idea/TEDHack.iml" />
       <module fileurl="file://$USER_HOME$/PycharmProjects/matrixtest/.idea/matrixtest.iml" filepath="$USER_HOME$/PycharmProjects/matrixtest/.idea/matrixtest.iml" />
-      <module fileurl="file://$USER_HOME$/synapse/.idea/synapse.iml" filepath="$USER_HOME$/synapse/.idea/synapse.iml" />
     </modules>
   </component>
 </project>

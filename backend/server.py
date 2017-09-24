@@ -1,101 +1,151 @@
 # coding=utf-8
-from flask import Flask, request
+import os
+from flask import Flask, request, redirect, url_for
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 from json import dumps, loads
+from werkzeug.utils import secure_filename
 import json
 import server_actions
 import user
 import random
 import string
 
+UPLOAD_FOLDER = '/tmp'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
 
 class Server(Resource):
     """
     Special class for flask
     """
-    def __init__(self):
-        self.actions = server_actions.Actions()
-        self.tokens = {}
-        self.logins = {}
 
-    def get_new_token(self, login, password):
+    def __init__(self):
+        self._actions = server_actions.Actions()
+        self._tokens = {}
+        self._logins = {}
+
+    def _get_new_token(self, login, password):
         TOKEN_LEN = 32
-        if self.actions.storage.is_user(login, password):
+        if self._actions.storage.is_user(login, password):
             token = ''.join(
                 random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
             )
-            if login in self.tokens:
-                self.tokens.pop(self.logins[login])
-                self.logins.pop(login)
-            self.logins[login] = token
-            self.tokens[token] = login
+            if login in self._logins:
+                self._tokens.pop(self._logins[login])
+                self._logins.pop(login)
+            self._logins[login] = token
+            self._tokens[token] = login
             return token
         else:
             return None
 
-    def is_correct_token(self, token):
-        return token in self.tokens
+    def _is_correct_token(self, token):
+        return token in self._tokens
 
     @staticmethod
-    def get_user_from_json(data):
+    def _get_user_from_json(data):
         return user.User(**data)
 
     def get(self, function_name, args):
+        SPECIAL_ANSWER = 'FUCK YOU!'
         try:
             parsed = loads(str(args))
         except TypeError:
-            return "FUCK YOU!"
+            return SPECIAL_ANSWER
         try:
-            login = parsed['login']
             if function_name == 'new_user':
-                #print(parsed)
-                return self.actions.new_user(
+                login = parsed['login']
+                return self._actions.new_user(
                     login,
                     parsed['password'],
-                    Server.get_user_from_json(parsed['user'])
+                    Server._get_user_from_json(parsed['user'])
                 )
             elif function_name == 'get_new_token':
-                return self.get_new_token(
+                login = parsed['login']
+                return self._get_new_token(
                     login,
                     parsed['password']
                 )
-            elif self.logins[login] == parsed['token']:
+            elif self._is_correct_token(parsed['token']):
+                login = self._tokens[parsed['token']]
                 if function_name == 'find_person_nearby':
-                    return self.actions.find_person_nearby(
+                    temp_users = self._actions.find_person_nearby(
                         login,
                         int(parsed['max_duration']),
                         parsed['sex'],
                         int(parsed['min_age']),
                         int(parsed['max_age'])
                     )
+                    for i in range(len(temp_users)):
+                        temp_users[i] = temp_users[i].to_dick()
+                        info = temp_users[i]['person_info']
+                        if 'position' in info:
+                            info['position'] = list(info['position'])
+                        if 'targets' in info:
+                            info['targets'] = list(info['targets'])
+                    return dumps(temp_users)
+
                 elif function_name == 'update_position':
-                    return self.actions.update_position(
+                    return self._actions.update_position(
                         login,
-                        parsed['position']
+                        tuple(parsed['position'])
                     )
                 elif function_name == 'update_user_info':
-                    return self.actions.update_user_info(
+                    return self._actions.update_user_info(
                         login,
-                        Server.get_user_from_json(parsed['user'])
+                        Server._get_user_from_json(parsed['user'])
                     )
-                elif function_name == 'update_position_targets':
-                    return self.actions.update_targets(
+                elif function_name == 'update_targets':
+                    return self._actions.update_targets(
                         login,
-                        parsed['targets']
+                        set(parsed['targets'])
                     )
         except IndexError:
-            return "FUCK YOU!"
-        return "FUCK YOU!"
+            return SPECIAL_ANSWER
+        return SPECIAL_ANSWER
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def start_server():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/image', static_folder='tmp')
     api = Api(app)
     api.add_resource(Server, '/<string:function_name>/<args>')
+
+    @app.route('/', methods=['GET', 'POST'])
+    def upload_file():
+        if request.method == 'POST':
+            # check if the post request has the file part
+            if 'file' not in request.files:
+                flash('No file part')
+                return redirect(request.url)
+            file = request.files['file']
+            # if user does not select file, browser also
+            # submit a empty part without filename
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, filename))
+                return redirect(url_for('uploaded_file',
+                                        filename=filename))
+        return '''
+        <!doctype html>
+        <title>Upload new File</title>
+        <h1>Upload new File</h1>
+        <form method=post enctype=multipart/form-data>
+          <p><input type=file name=file>
+             <input type=submit value=Upload>
+        </form>
+        '''
+
     app.run()
 
 
 if __name__ == '__main__':
-    pass
-    #start_server()
+    start_server()

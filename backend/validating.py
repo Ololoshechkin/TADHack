@@ -18,13 +18,13 @@ def validate_login(login):
     return has_letter
 
 
-def validate_year(year):
-    if not year:
+def validate_age(age):
+    if not age:
         return False
-    if not year.isdigit():
+    if not age.isdigit():
         return False
-    year_digit = int(year)
-    return 1900 <= year_digit <= current_date.year
+    age_digit = int(age)
+    return 1900 <= age_digit <= current_date.age
 
 
 def validate_name(name):
