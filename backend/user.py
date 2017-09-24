@@ -1,5 +1,7 @@
 import pickle
 
+SAVE_NAME = "tmp/TEST_DB_001"
+
 
 class Record:
     def __init__(self, login, password):
@@ -38,6 +40,9 @@ class RecordsStorage:
             pickle.dump(self.data, file=file)
         with open(name + "_users", 'wb') as file:
             pickle.dump(self.users, file=file)
+
+    def __del__(self):
+        self.save(SAVE_NAME)
 
 
 class User:
