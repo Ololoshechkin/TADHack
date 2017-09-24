@@ -27,7 +27,7 @@ class TestServer(unittest.TestCase):
                 "user": {
                     "name": "Stas",
                     "sex": "m",
-                    "age": 1998,
+                    "age": 98,
                     "login": "josdas",
                     "person_info": {}
                 }
