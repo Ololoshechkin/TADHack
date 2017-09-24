@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.hideKeyboardWhenTappedAround()
         picker.delegate = self
         photo.image = user!.photo ?? #imageLiteral(resourceName: "parisImage")
         age.text = "\(user!.age) years old"

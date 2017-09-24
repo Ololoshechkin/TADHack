@@ -256,14 +256,14 @@
         <!--Search-->
         <scene sceneID="ZaG-cv-GXa">
             <objects>
-                <tableViewController id="5CL-sE-vm0" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="EbV-qy-tqW">
+                <tableViewController id="5CL-sE-vm0" customClass="SearchViewController" customModule="TouristChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="EbV-qy-tqW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DistanceCell" rowHeight="150" id="ha9-ug-n1c" userLabel="Distance Cell" customClass="DistanceCell" customModule="TouristChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ha9-ug-n1c" id="Hos-19-cWr">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
@@ -276,18 +276,24 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cuj-V8-40m">
-                                            <rect key="frame" x="28" y="41" width="190" height="29"/>
+                                            <rect key="frame" x="28" y="41" width="241" height="29"/>
                                             <segments>
                                                 <segment title="5 min"/>
                                                 <segment title="20 min"/>
                                                 <segment title="other :"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="switch:" destination="ha9-ug-n1c" eventType="valueChanged" id="xDI-l8-pCn"/>
+                                            </connections>
                                         </segmentedControl>
                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="4qt-Ra-4xm">
                                             <rect key="frame" x="26" y="89" width="323" height="31"/>
+                                            <connections>
+                                                <action selector="slide:" destination="ha9-ug-n1c" eventType="valueChanged" id="6Yy-HQ-EPj"/>
+                                            </connections>
                                         </slider>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="chosen time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dft-Ya-jBP">
-                                            <rect key="frame" x="253" y="45" width="94" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dft-Ya-jBP">
+                                            <rect key="frame" x="304" y="45" width="43" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -300,28 +306,36 @@
                                         <constraint firstItem="4qt-Ra-4xm" firstAttribute="leading" secondItem="Hos-19-cWr" secondAttribute="leadingMargin" constant="20" id="Kkt-Wi-Jj0"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="4qt-Ra-4xm" secondAttribute="trailing" constant="20" id="NBz-Mi-ywo"/>
                                         <constraint firstItem="4qt-Ra-4xm" firstAttribute="top" secondItem="Cuj-V8-40m" secondAttribute="bottom" constant="20" id="Ng5-NF-BVq"/>
-                                        <constraint firstItem="Dft-Ya-jBP" firstAttribute="leading" secondItem="Cuj-V8-40m" secondAttribute="trailing" constant="35" id="Rk4-kd-Svc"/>
+                                        <constraint firstItem="Dft-Ya-jBP" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Cuj-V8-40m" secondAttribute="trailing" constant="35" id="Rk4-kd-Svc"/>
                                         <constraint firstItem="Cuj-V8-40m" firstAttribute="leading" secondItem="Hos-19-cWr" secondAttribute="leadingMargin" constant="20" id="bqO-gT-say"/>
                                         <constraint firstItem="Dft-Ya-jBP" firstAttribute="top" secondItem="eF8-6Q-Hfe" secondAttribute="bottom" constant="14" id="t7I-OB-C8V"/>
                                         <constraint firstItem="eF8-6Q-Hfe" firstAttribute="centerX" secondItem="Hos-19-cWr" secondAttribute="centerX" id="xTV-7j-ejl"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="chosenTime" destination="Dft-Ya-jBP" id="Hjw-mR-n70"/>
+                                    <outlet property="slider" destination="4qt-Ra-4xm" id="O2d-fa-OXZ"/>
+                                    <outlet property="switcher" destination="Cuj-V8-40m" id="39S-hF-LG0"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SexCell" rowHeight="50" id="FaG-cT-OVV" userLabel="Sex Cell" customClass="SexCell" customModule="TouristChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="178" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="205.5" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FaG-cT-OVV" id="pUW-a8-hve">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ezw-bk-QLd">
-                                            <rect key="frame" x="182" y="8" width="170" height="28"/>
+                                            <rect key="frame" x="180" y="8" width="176" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
-                                                <segment title="First"/>
-                                                <segment title="Second"/>
-                                                <segment title=""/>
+                                                <segment title="Any"/>
+                                                <segment title="Male"/>
+                                                <segment title="Female"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="sexSwitched:" destination="FaG-cT-OVV" eventType="valueChanged" id="foo-8K-Adg"/>
+                                            </connections>
                                         </segmentedControl>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC0-dd-b2b">
                                             <rect key="frame" x="28" y="14" width="28" height="21"/>
@@ -335,9 +349,12 @@
                                         <constraint firstItem="dC0-dd-b2b" firstAttribute="leading" secondItem="pUW-a8-hve" secondAttribute="leadingMargin" constant="20" id="i4N-zm-De1"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="sexSwither" destination="ezw-bk-QLd" id="n31-Hg-mWZ"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AgeCell" rowHeight="50" id="X7i-bq-mv2" userLabel="Age Cell" customClass="AgeCell" customModule="TouristChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="228" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="255.5" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X7i-bq-mv2" id="PgK-Xs-H11">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -369,6 +386,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <connections>
+                                                <action selector="minAgeCange:" destination="X7i-bq-mv2" eventType="editingDidEnd" id="htT-n3-XvX"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="200" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="86q-m7-6J9">
                                             <rect key="frame" x="242" y="9" width="50" height="30"/>
@@ -378,6 +398,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <connections>
+                                                <action selector="maxAgeChange:" destination="X7i-bq-mv2" eventType="editingDidEnd" id="c3T-p5-GOS"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -393,15 +416,19 @@
                                         <constraint firstItem="38o-Ob-V3G" firstAttribute="centerY" secondItem="PgK-Xs-H11" secondAttribute="centerY" id="yVt-jF-GtK"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="maxAge" destination="86q-m7-6J9" id="00q-Rc-EdC"/>
+                                    <outlet property="minAge" destination="n7M-N2-O7m" id="OEv-4j-KHR"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InterestCell" rowHeight="50" id="mdn-Z0-uNZ" userLabel="Interest Cell" customClass="InterestsCell" customModule="TouristChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="278" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="305.5" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mdn-Z0-uNZ" id="dci-oq-fcx">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ws0-YA-SCq">
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ws0-YA-SCq">
                                             <rect key="frame" x="298" y="10" width="51" height="31"/>
                                             <connections>
                                                 <action selector="checkBoxPress:" destination="mdn-Z0-uNZ" eventType="valueChanged" id="WzP-4w-aRb"/>
@@ -426,17 +453,112 @@
                                     <outlet property="interestLabel" destination="UYy-RD-oEC" id="CZ3-7E-gkQ"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RequestCell" rowHeight="50" id="Db8-0T-oNg" userLabel="Request Cell" customClass="FindCell" customModule="TouristChat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="355.5" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Db8-0T-oNg" id="Da1-VI-Z7g">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUn-bD-e3H">
+                                            <rect key="frame" x="172" y="10" width="30" height="30"/>
+                                            <state key="normal" title="Find"/>
+                                            <connections>
+                                                <action selector="find:" destination="Db8-0T-oNg" eventType="touchUpInside" id="wgf-5B-eg9"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="JUn-bD-e3H" firstAttribute="centerX" secondItem="Da1-VI-Z7g" secondAttribute="centerX" id="7I4-ev-IiR"/>
+                                        <constraint firstItem="JUn-bD-e3H" firstAttribute="centerY" secondItem="Da1-VI-Z7g" secondAttribute="centerY" id="7ip-17-WJ4"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="5CL-sE-vm0" id="93F-Mi-sAX"/>
                             <outlet property="delegate" destination="5CL-sE-vm0" id="F5W-3s-Hei"/>
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Search" image="search" id="C0R-iA-stB"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19W-42-VJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4376.8000000000002" y="1700.5997001499252"/>
+        </scene>
+        <!--Search Results Table-->
+        <scene sceneID="BzP-ti-dtH">
+            <objects>
+                <tableViewController storyboardIdentifier="Results" id="gQ2-NX-uDk" customClass="SearchResultsTable" customModule="TouristChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="4KA-Zy-P7N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="Nul-eG-r1k" customClass="SearchResultCell" customModule="TouristChat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nul-eG-r1k" id="w54-ms-aSb">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wk-2J-K5j">
+                                            <rect key="frame" x="18" y="16" width="63" height="57"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="7wk-2J-K5j" secondAttribute="height" multiplier="21:19" id="Fmv-2h-ype"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Surname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msA-l1-ulL">
+                                            <rect key="frame" x="101" y="18" width="125.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXC-Og-I1g">
+                                            <rect key="frame" x="139" y="47" width="30" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTD-PP-icf">
+                                            <rect key="frame" x="101" y="47" width="28" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="IXC-Og-I1g" firstAttribute="leading" secondItem="FTD-PP-icf" secondAttribute="trailing" constant="10" id="3ar-1u-XLd"/>
+                                        <constraint firstItem="7wk-2J-K5j" firstAttribute="top" secondItem="w54-ms-aSb" secondAttribute="topMargin" constant="8" id="Bee-yM-anM"/>
+                                        <constraint firstItem="FTD-PP-icf" firstAttribute="top" secondItem="msA-l1-ulL" secondAttribute="bottom" constant="8" id="L4p-Wg-a10"/>
+                                        <constraint firstItem="msA-l1-ulL" firstAttribute="leading" secondItem="7wk-2J-K5j" secondAttribute="trailing" constant="20" id="a1z-IC-RVD"/>
+                                        <constraint firstItem="7wk-2J-K5j" firstAttribute="leading" secondItem="w54-ms-aSb" secondAttribute="leadingMargin" constant="10" id="bmK-nr-zhE"/>
+                                        <constraint firstItem="msA-l1-ulL" firstAttribute="top" secondItem="w54-ms-aSb" secondAttribute="topMargin" constant="10" id="fDW-eF-Vao"/>
+                                        <constraint firstItem="IXC-Og-I1g" firstAttribute="top" secondItem="msA-l1-ulL" secondAttribute="bottom" constant="8" id="l4M-XS-MRq"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="7wk-2J-K5j" secondAttribute="bottom" constant="8" id="qnC-xM-qbD"/>
+                                        <constraint firstItem="FTD-PP-icf" firstAttribute="leading" secondItem="7wk-2J-K5j" secondAttribute="trailing" constant="20" id="qog-eU-2Kd"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="age" destination="IXC-Og-I1g" id="ny3-RN-4Gb"/>
+                                    <outlet property="nameSurname" destination="msA-l1-ulL" id="euv-9O-CEv"/>
+                                    <outlet property="photo" destination="7wk-2J-K5j" id="y7m-3i-9PO"/>
+                                    <outlet property="sex" destination="FTD-PP-icf" id="DCg-D8-5NV"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gQ2-NX-uDk" id="Zjg-D9-fkd"/>
+                            <outlet property="delegate" destination="gQ2-NX-uDk" id="LIK-Sp-Fpo"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1V9-mD-c0D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5493.6000000000004" y="1643.9280359820091"/>
         </scene>
         <!--Profile-->
         <scene sceneID="fBm-ds-m6c">
