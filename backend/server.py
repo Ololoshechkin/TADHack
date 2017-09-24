@@ -16,30 +16,29 @@ class Server(Resource):
     """
     Special class for flask
     """
-    _actions = server_actions.Actions()
-    _tokens = {}
-    _logins = {}
 
     def __init__(self):
-        pass
+        self._actions = server_actions.Actions()
+        self._tokens = {}
+        self._logins = {}
 
     def _get_new_token(self, login, password):
         TOKEN_LEN = 32
-        if Server._actions.storage.is_user(login, password):
+        if self._actions.storage.is_user(login, password):
             token = ''.join(
                 random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(TOKEN_LEN)
             )
-            if login in Server._logins:
-                Server._tokens.pop(Server._logins[login])
-                Server._logins.pop(login)
-            Server._logins[login] = token
-            Server._tokens[token] = login
+            if login in self._logins:
+                self._tokens.pop(self._logins[login])
+                self._logins.pop(login)
+            self._logins[login] = token
+            self._tokens[token] = login
             return token
         else:
             return None
 
     def _is_correct_token(self, token):
-        return token in Server._tokens
+        return token in self._tokens
 
     @staticmethod
     def _get_user_from_json(data):
@@ -55,7 +54,7 @@ class Server(Resource):
         try:
             if function_name == 'new_user':
                 login = parsed['login']
-                Server._actions.new_user(
+                self._actions.new_user(
                     login,
                     parsed['password'],
                     Server._get_user_from_json(parsed['user'])
@@ -63,14 +62,14 @@ class Server(Resource):
                 return SUCCESS_ANSWER
             elif function_name == 'get_new_token':
                 login = parsed['login']
-                return Server._get_new_token(
+                return self._get_new_token(
                     login,
                     parsed['password']
                 )
-            elif Server._is_correct_token(parsed['token']):
-                login = Server._tokens[parsed['token']]
+            elif self._is_correct_token(parsed['token']):
+                login = self._tokens[parsed['token']]
                 if function_name == 'find_person_nearby':
-                    temp_users = Server._actions.find_person_nearby(
+                    temp_users = self._actions.find_person_nearby(
                         login,
                         int(parsed['max_duration']),
                         parsed['sex'],
@@ -86,19 +85,19 @@ class Server(Resource):
                             info['targets'] = list(info['targets'])
                     return dumps(temp_users)
                 elif function_name == 'update_position':
-                    Server._actions.update_position(
+                    self._actions.update_position(
                         login,
                         tuple(parsed['position'])
                     )
                     return SUCCESS_ANSWER
                 elif function_name == 'update_user_info':
-                    Server._actions.update_user_info(
+                    self._actions.update_user_info(
                         login,
                         Server._get_user_from_json(parsed['user'])
                     )
                     return SUCCESS_ANSWER
                 elif function_name == 'update_targets':
-                    Server._actions.update_targets(
+                    self._actions.update_targets(
                         login,
                         set(parsed['targets'])
                     )
@@ -106,6 +105,12 @@ class Server(Resource):
         except IndexError:
             return SPECIAL_ANSWER
         return SPECIAL_ANSWER
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 def start_server():
     app = Flask(__name__, static_url_path='/image', static_folder='tmp')
