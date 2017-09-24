@@ -101,9 +101,22 @@ class Server(Resource):
                         login,
                         set(parsed['targets'])
                     )
+                elif function_name == 'send_message':
+                    return self._actions.send_message(
+                        login,
+                        parsed['login_to'],
+                        parsed['message']
+                    )
+                elif function_name == 'get_message':
+                    return self._actions.get_messages(
+                        login,
+                        parsed['login_to']
+                    )
+
         except IndexError:
             return SPECIAL_ANSWER
         return SPECIAL_ANSWER
+
 
 
 def allowed_file(filename):
@@ -148,4 +161,40 @@ def start_server():
 
 
 if __name__ == '__main__':
-    start_server()
+    #start_server()
+    server = Server()
+    token = server.get('get_new_token', dumps({
+        "login" : "wafemand",
+        "password" : "monkey"
+    }))
+    server.get('new_user', dumps({
+        "login": 'josdas',
+        "password": 'monkey',
+        "user": {
+            "name": "Stas",
+            "sex": "m",
+            "age": 1998,
+            "login": "josdas",
+            "person_info": {}
+        }
+    }))
+    server.get('new_user', dumps({
+        "login": 'wafemand',
+        "password": 'monkey',
+        "user": {
+            "name": "Stas",
+            "sex": "m",
+            "age": 1998,
+            "login": "josdas",
+            "person_info": {}
+        }
+    }))
+    server.get('send_message', dumps({
+        "token" : token,
+        "login_to" : "josdas",
+        "message" : "huy"
+    }))
+    print(server.get('get_message', dumps({
+        "token" : token,
+        "login_to" : "josdas"
+    })))
