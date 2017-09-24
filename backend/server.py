@@ -12,15 +12,21 @@ import random
 import string
 import copy
 
+
 class Server(Resource):
     """
+    Singleton!
     Special class for flask
     """
 
     def __init__(self):
-        self._actions = server_actions.Actions()
-        self._tokens = {}
-        self._logins = {}
+        if not hasattr(Server, '_actions'):
+            Server._actions = server_actions.Actions()
+            Server._tokens = {}
+            Server._logins = {}
+        self._actions = Server._actions
+        self._tokens = Server._tokens
+        self._logins = Server._logins
 
     def _get_new_token(self, login, password):
         TOKEN_LEN = 32
