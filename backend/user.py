@@ -61,7 +61,7 @@ class User:
         return self.name + " " + self.sex + " " + str(self.age)
 
     def __eq__(self, other):
-        return self.year == other.year and \
+        return self.age == other.age and \
                self.login == other.login and \
                self.sex == other.sex and \
                self.person_info == other.person_info and \
