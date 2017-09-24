@@ -80,7 +80,7 @@ class Server(Resource):
                 elif function_name == 'update_position':
                     return self._actions.update_position(
                         login,
-                        typle(parsed['position'])
+                        tuple(parsed['position'])
                     )
                 elif function_name == 'update_user_info':
                     return self._actions.update_user_info(
