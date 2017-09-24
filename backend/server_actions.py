@@ -9,6 +9,18 @@ class Actions:
     def __init__(self):
         self.storage = user.RecordsStorage()# user.SAVE_NAME)
         self.gmap = distance.GMap(distance.GOOGLE_API_KEY)
+        self.messages_storage = {} # user -> [new messages]
+        self.clients = {} # user -> client
+
+    def on_message(room, event):
+        if event['type'] == "m.room.member":
+            if event['membership'] == "join":
+                print("{0} joined".format(event['content']['displayname']))
+        elif event['type'] == "m.room.message":
+            if event['content']['msgtype'] == "m.text":
+                print("{0}: {1}".format(event['sender'], event['content']['body']))
+        else:
+            print(event['type'])
 
     def find_person_nearby(self, main_login, max_duration, sex, min_age, max_age):
         main_user = self.storage.users[main_login]
@@ -35,6 +47,9 @@ class Actions:
 
     def new_user(self, login, password, person):
         self.storage.add_user(user.Record(login, password), person)
+        self.clients[login] = MatrixClient("https://tang.ents.ca")
+
+
 
     def send_message(self, login_from, login_to, message):
         host = "https://tang.ents.ca"
@@ -53,11 +68,13 @@ class Actions:
         username = login_from
         password = self.storage.data[login_from]
         token = client.login_with_password(username, password)
-        print(token)
         alias = min(login_from, login_to) + max(login_from, login_to)
         room_id_alias = "#" + alias + ":tang.ents.ca"
         room = client.join_room(room_id_alias)
-        ret = client.api.get_room_messages(room_id=room.room_id, token=client.token, direction="b")
+        print(token==client.token)
+        ret = client.api.get_room_messages(room_id=room.room_id, token=token, direction="b")
         print(ret)
+
+
 
 
