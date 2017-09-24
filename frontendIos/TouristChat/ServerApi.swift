@@ -63,8 +63,15 @@ class ServerApi {
         }
     }
     
-    class func signUp(login: String, password: String, name: String, secondName: String, interests: String, postAction: () -> ()){
-        postAction()
+    class func signUp(login: String, password: Int, name: String, secondName: String, interests: String, sex: String, age: Int, postAction: @escaping () -> ()){
+        var url : NSString = "http://127.0.0.1:5000/new_user/{\"login\": \"\(login)\", \"password\": \"\(password)\", \"user\": {\"name\": \"\(name) \(secondName)\", \"sex\": \"\(sex.characters.first!)\", \"age\": \"\(age)\", \"login\": \"\(login)\", \"person_info\": {}}}" as NSString
+        var urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
+        var searchURL : NSURL = NSURL(string: urlStr as String as String)!
+        print(searchURL)
+        let task = URLSession.shared.dataTask(with: searchURL as URL) {(data, response, error) in
+            print("\nresponce = \(response)\n")
+            postAction()
+        }
     }
     
     class func searchRequest(map: [String: Any]) -> [UserSmall] {
