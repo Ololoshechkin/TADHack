@@ -48,5 +48,14 @@ class User:
         self.login = login
         self.person_info = person_info
 
+    def to_dick(self):
+        return {
+            'name': self.name,
+            'sex': self.sex,
+            'age': self.age,
+            'login': self.login,
+            'person_info': self.person_info
+        }
+
     def __str__(self):
         return self.name + " " + self.sex + " " + str(self.age)

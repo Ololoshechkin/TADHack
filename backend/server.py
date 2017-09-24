@@ -70,13 +70,23 @@ class Server(Resource):
             elif self._is_correct_token(parsed['token']):
                 login = self._tokens[parsed['token']]
                 if function_name == 'find_person_nearby':
-                    return self._actions.find_person_nearby(
+                    temp_users = self._actions.find_person_nearby(
                         login,
                         int(parsed['max_duration']),
                         parsed['sex'],
                         int(parsed['min_age']),
                         int(parsed['max_age'])
                     )
+                    for i in range(len(temp_users)):
+                        temp_users[i] = temp_users[i].to_dick()
+                        info = temp_users[i]['person_info']
+                        if 'position' in info:
+                            info['position'] = list(info['position'])
+                        if 'targets' in info:
+                            info['targets'] = list(info['targets'])
+                    print(temp_users)
+                    return dumps(temp_users)
+
                 elif function_name == 'update_position':
                     return self._actions.update_position(
                         login,

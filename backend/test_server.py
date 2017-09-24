@@ -54,7 +54,7 @@ class TUI_PIDOR(unittest.TestCase):
         ]
         rets += [
             server.get('update_position', dumps(
-                {"token": server._get_new_token('josdas', '1234'), "position":[1, 2]}
+                {"token": server._get_new_token('josdas', '1234'), "position":[60.015405, 30.289095]}
             ))
         ]
         rets += [
@@ -64,7 +64,7 @@ class TUI_PIDOR(unittest.TestCase):
         ]
         rets += [
             server.get('update_position', dumps(
-                {"token": server._get_new_token('yura', '1111'), "position": [1, 2]}
+                {"token": server._get_new_token('yura', '1111'), "position": [60.016405, 30.289095]}
             ))
         ]
         rets += [
@@ -74,7 +74,7 @@ class TUI_PIDOR(unittest.TestCase):
         ]
         rets += [
             server.get('find_person_nearby', dumps({
-                "token": server._get_new_token("josdas", "1234"), "max_duration":"10", "sex":["m"], "min_age":"0", "max_age":"14"
+                "token": server._get_new_token("josdas", "1234"), "max_duration":"10900000", "sex":["m"], "min_age":"0", "max_age":"14"
             }
             )
                        )
