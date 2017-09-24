@@ -46,6 +46,10 @@ class User:
         self.sex = sex
         self.age = int(age)
         self.login = login
+        if 'position' in person_info:
+            person_info['position'] = tuple(person_info['position'])
+        if 'targets' in person_info:
+            person_info['targets'] = set(person_info['targets'])
         self.person_info = person_info
 
     def to_dick(self):
