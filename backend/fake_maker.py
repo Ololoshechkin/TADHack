@@ -76,7 +76,7 @@ if __name__ == "__main__":
     }))
 
     server.get('update_position', dumps(
-        {"token": server._get_new_token('Zaharych', '1111'), "position": [100.874510, 130.336021]}
+        {"token": server._get_new_token('Zaharych', '1111'), "position": [59.927608, 31.018492]}
     ))
 
     server.get('update_targets', dumps(
@@ -125,3 +125,10 @@ if __name__ == "__main__":
         {"token": server._get_new_token('KokorinIlya', 'LoveRNG1721'),
          "targets": ["walking", "pubs", "cinema", "music", "sport", "bike"]}
     ))
+
+    print(server._get_new_token('josdas', '1234'))
+    print(server._get_new_token('Ololoshechkin', '1111'))
+    print(server._get_new_token('Yura', 'LoveVika1998'))
+    print(server._get_new_token('Zaharych', '1111'))
+    print(server._get_new_token('Lev', '1111'))
+    print(server._get_new_token('KokorinIlya', 'LoveRNG1721'))
