@@ -16,6 +16,7 @@ class SearchResultsTable: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.hideKeyboardWhenTappedAround()
+        self.navigationItem.title = "Search results"
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
