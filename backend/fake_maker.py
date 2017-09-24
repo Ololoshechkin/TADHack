@@ -11,7 +11,7 @@ if __name__ == "__main__":
             "sex": "m",
             "age": 18,
             "login": "josdas",
-            "person_info": {"interests":"backend, backend, backend and more backend"}
+            "person_info": {"interests": "backend, backend, backend and more backend"}
         }
     }))
 
