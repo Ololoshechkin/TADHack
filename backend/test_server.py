@@ -35,7 +35,7 @@ class TUI_PIDOR(unittest.TestCase):
         ]
         rets += [
             server.get('new_user', dumps({
-                "login": 'wafemand',
+                "login": 'yura',
                 "password": '1111',
                 "user": {
                     "name": "Andrey",
@@ -60,6 +60,16 @@ class TUI_PIDOR(unittest.TestCase):
         rets += [
             server.get('update_targets', dumps(
                 {"token": server._get_new_token('josdas', '1234'), "targets":["SOSAT"]}
+            ))
+        ]
+        rets += [
+            server.get('update_position', dumps(
+                {"token": server._get_new_token('yura', '1111'), "position": [1, 2]}
+            ))
+        ]
+        rets += [
+            server.get('update_targets', dumps(
+                {"token": server._get_new_token('yura', '1111'), "targets": ["SOSAT"]}
             ))
         ]
         rets += [
