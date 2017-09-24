@@ -40,7 +40,7 @@ class TUI_PIDOR(unittest.TestCase):
                 "user": {
                     "name": "Andrey",
                     "sex": "m",
-                    "age": 1999,
+                    "age": 10,
                     "login": "wafemand",
                     "person_info": {}
                 }
