@@ -5,6 +5,8 @@ __pycache__/
 *$py.class
 .pyc
 backend/__pycache__/
+backend/tmp/TEST_DB_001_passwords
+backend/tmp/TEST_DB_001_users
 
 # C extensions
 *.so
