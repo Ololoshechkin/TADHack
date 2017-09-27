@@ -45,12 +45,14 @@ class SignUpPageViewController: UIViewController {
                 interests: interestsTextBox.text!,
                 sex: "male",
                 age: 19,
-                postAction: {
-                    self.prevPage()?.showAlert(
-                        title: "Congratulations",
-                        message: "Registration ended up successfully!!!"
-                    )}
-            )
+                postAction: { [weak self] in
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        self?.prevPage()?.showAlert(
+                            title: "Congratulations",
+                            message: "Registration ended up successfully!!!"
+                        )
+                    })
+            })
         }
     }
     

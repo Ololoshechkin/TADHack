@@ -28,6 +28,10 @@
 		DDF82BDA1F7730720042BFF4 /* SearchResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BD91F7730720042BFF4 /* SearchResultsTable.swift */; };
 		DDF82BDC1F7738B30042BFF4 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BDB1F7738B30042BFF4 /* MessagesViewController.swift */; };
 		DDF82BDE1F773BA70042BFF4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF82BDD1F773BA70042BFF4 /* CoreLocation.framework */; };
+		DDF82BE01F77B7850042BFF4 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BDF1F77B7850042BFF4 /* UserInfoViewController.swift */; };
+		DDF82BE21F77C1CC0042BFF4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BE11F77C1CC0042BFF4 /* ChatViewController.swift */; };
+		DDF82BE41F77C9B50042BFF4 /* SendButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BE31F77C9B50042BFF4 /* SendButtonCell.swift */; };
+		DDF82BE61F77CDD70042BFF4 /* MessageCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF82BE51F77CDD70042BFF4 /* MessageCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +59,10 @@
 		DDF82BD91F7730720042BFF4 /* SearchResultsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTable.swift; sourceTree = "<group>"; };
 		DDF82BDB1F7738B30042BFF4 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		DDF82BDD1F773BA70042BFF4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DDF82BDF1F77B7850042BFF4 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		DDF82BE11F77C1CC0042BFF4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		DDF82BE31F77C9B50042BFF4 /* SendButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButtonCell.swift; sourceTree = "<group>"; };
+		DDF82BE51F77CDD70042BFF4 /* MessageCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCells.swift; sourceTree = "<group>"; };
 		F38365F0BB9F0B891DE44E30 /* Pods-TouristChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TouristChat/Pods-TouristChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +121,7 @@
 				DDC3FC8D1F75B793001AF282 /* AppDelegate.swift */,
 				DDE93FE21F76AFCF0042D10E /* SearchViewController.swift */,
 				DDE93FDE1F769C710042D10E /* ProfileViewController.swift */,
+				DDF82BDF1F77B7850042BFF4 /* UserInfoViewController.swift */,
 				DDC3FC8F1F75B793001AF282 /* ViewController.swift */,
 				DDF82BDB1F7738B30042BFF4 /* MessagesViewController.swift */,
 				DDE93FE41F76F9530042D10E /* RequestCells.swift */,
@@ -121,11 +130,14 @@
 				DDF82BD71F7730440042BFF4 /* SearchResultCell.swift */,
 				DDE93FDA1F7685DB0042D10E /* ServerApi.swift */,
 				DDE93FD21F7671E70042D10E /* LoginPageVIewController.swift */,
+				DDF82BE11F77C1CC0042BFF4 /* ChatViewController.swift */,
 				DDE93FDC1F768E700042D10E /* TestFile.swift */,
 				DDE93FD81F767E780042D10E /* Extensions.swift */,
 				DDE93FD41F7672160042D10E /* SignInPageViewController.swift */,
+				DDF82BE51F77CDD70042BFF4 /* MessageCells.swift */,
 				DDE93FD61F76721E0042D10E /* SignUpPageViewController.swift */,
 				DDC3FC911F75B793001AF282 /* Main.storyboard */,
+				DDF82BE31F77C9B50042BFF4 /* SendButtonCell.swift */,
 				DDC3FC971F75B793001AF282 /* Assets.xcassets */,
 				DDC3FC991F75B793001AF282 /* LaunchScreen.storyboard */,
 				DDC3FC9C1F75B793001AF282 /* Info.plist */,
@@ -283,12 +295,16 @@
 				DDC3FC901F75B793001AF282 /* ViewController.swift in Sources */,
 				DDE93FE11F769D4E0042D10E /* ProfileOrSearchTabBarController.swift in Sources */,
 				DDE93FE31F76AFCF0042D10E /* SearchViewController.swift in Sources */,
+				DDF82BE01F77B7850042BFF4 /* UserInfoViewController.swift in Sources */,
 				DDE93FDB1F7685DB0042D10E /* ServerApi.swift in Sources */,
 				DDE93FD71F76721E0042D10E /* SignUpPageViewController.swift in Sources */,
 				DDC3FC8E1F75B793001AF282 /* AppDelegate.swift in Sources */,
+				DDF82BE61F77CDD70042BFF4 /* MessageCells.swift in Sources */,
 				DDE93FE51F76F9530042D10E /* RequestCells.swift in Sources */,
 				DDE93FD51F7672160042D10E /* SignInPageViewController.swift in Sources */,
 				DDF82BDC1F7738B30042BFF4 /* MessagesViewController.swift in Sources */,
+				DDF82BE41F77C9B50042BFF4 /* SendButtonCell.swift in Sources */,
+				DDF82BE21F77C1CC0042BFF4 /* ChatViewController.swift in Sources */,
 				DDE93FD91F767E780042D10E /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

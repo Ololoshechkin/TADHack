@@ -18,9 +18,10 @@ class TestFile {
         secondName: "Brilyantov",
         age: 19,
         sex: .MALE,
-        interests: "sports programming, kotlin development, sports",
+        interests: "",//sports programming, kotlin development, sports",
         photo: nil
     )
     
-    static let searchResults = [ServerApi.UserSmall("kek", "Stas", "Naumov", 18, "male", nil), ServerApi.UserSmall("kek2", "Ilya", "Kokorin", 19, "male", nil), ServerApi.UserSmall("kek3", "Andrey", "Zakharov", 18, "male", nil), ServerApi.UserSmall("kek4", "Viktoria", "Erokhina", 19, "female", nil), ServerApi.UserSmall("kek6", "Yuri", "Bondarchuk", 19, "male", nil)]
+    static let searchResults = [ServerApi.User("josdas", "Stas", "Naumov", 18, "male", #imageLiteral(resourceName: "josdas")), ServerApi.User("K", "Ilya", "Kokorin", 19, "male", #imageLiteral(resourceName: "KokorinIlya")), ServerApi.User("kek3", "Andrey", "Zakharov", 18, "male", #imageLiteral(resourceName: "Zaharych")), ServerApi.User("kek4", "Andrey", "Geyen", 19, "female", #imageLiteral(resourceName: "Ololoshechkin")), ServerApi.User("kek6", "Yuri", "Bondarchuk", 19, "male", #imageLiteral(resourceName: "Yura")),
+     ServerApi.User("kek6", "Lev", "Dogzick", 19, "male", #imageLiteral(resourceName: "Lev"))]
 }
