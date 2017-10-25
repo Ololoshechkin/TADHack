@@ -1,2 +1,2 @@
-# TEDHack
-TEDHack hackathon project
+# TADHack
+TADHack hackathon project
